@@ -112,7 +112,6 @@
             margin-top: 2px;
         }
 
-        /* Interactive Target Token Button */
         .target-icon {
             width: 42px;
             height: 42px;
@@ -260,7 +259,7 @@
             margin-top: 10px;
         }
 
-        /* Modal Popup for Access Token Setup */
+        /* Modal Popup */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -346,7 +345,7 @@
         <div class="header">
             <div class="brand">
                 <div class="logo-box">
-                    <img src="https://i.postimg.co/g2T5B16V/logo.png" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <img src="https://archive.org/download/20261031-043559/20261031_043559.png" alt="Logo"[cite: 7] onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <i class="fa-solid fa-truck-pickup" style="display:none;"></i>
                 </div>
                 <div class="brand-text">
@@ -354,8 +353,8 @@
                     <p>Viral Collection</p>
                 </div>
             </div>
-            <!-- Target Icon Button to Configure Token -->
-            <button class="target-icon" onclick="openTokenModal()" title="Configure Access Token">
+            <!-- Target Icon Button for Access Token -->
+            <button type="button" class="target-icon" onclick="openTokenModal()" title="Configure Access Token">
                 <i class="fa-solid fa-bullseye"></i>
             </button>
         </div>
@@ -365,26 +364,26 @@
             
             <!-- Post Title -->
             <div class="form-group">
-                <label><i class="fa-solid fa-h"></i> POST TITLE</label>
+                <label><i class="fa-solid fa-pen"></i> Post Title</label>
                 <div class="input-pill-wrapper">
                     <input type="text" id="postTitle" placeholder="Enter post title..." required>
                 </div>
             </div>
 
-            <!-- Thumbnail Image -->
+            <!-- Post Image -->
             <div class="form-group">
-                <label><i class="fa-regular fa-image"></i> THUMBNAIL IMAGE</label>
+                <label><i class="fa-regular fa-image"></i> Post Image</label>
                 <div class="input-pill-wrapper">
                     <i class="fa-solid fa-cloud-arrow-up input-icon-inside"></i>
-                    <input type="text" id="thumbnailUrl" placeholder="Select thumbnail image...">
+                    <input type="text" id="thumbnailUrl" placeholder="Select post image...">
                     <button type="button" class="btn-browse" onclick="triggerFileInput('thumbnailUrl')">Browse</button>
                 </div>
             </div>
 
-            <!-- Additional Photos -->
+            <!-- Photos -->
             <div class="form-group">
                 <div class="label-container">
-                    <label><i class="fa-regular fa-images"></i> ADDITIONAL PHOTOS</label>
+                    <label><i class="fa-regular fa-images"></i> Photos</label>
                     <button type="button" class="btn-add-light" onclick="addNewField('additionalPhotosContainer', 'photo')">+ Add Photo</button>
                 </div>
                 <div id="additionalPhotosContainer">
@@ -396,10 +395,10 @@
                 </div>
             </div>
 
-            <!-- Video Streams -->
+            <!-- Video -->
             <div class="form-group">
                 <div class="label-container">
-                    <label><i class="fa-solid fa-video"></i> VIDEO STREAMS</label>
+                    <label><i class="fa-solid fa-video"></i> Video</label>
                     <button type="button" class="btn-add-light" onclick="addNewField('videoStreamsContainer', 'video')">+ Add Video</button>
                 </div>
                 <div id="videoStreamsContainer">
@@ -413,7 +412,7 @@
 
             <!-- Publish Button -->
             <button type="submit" class="btn-publish" id="publishBtn">
-                Publish to Blogger <i class="fa-solid fa-paper-plane"></i>
+                Publish to LiNK Hub <i class="fa-solid fa-paper-plane"></i>
             </button>
         </form>
     </div>
@@ -422,7 +421,7 @@
     <div class="modal-overlay" id="tokenModal">
         <div class="modal-box">
             <h3>Blogger Access Token</h3>
-            <p>আপনার OAuth Access Token এখানে পেস্ট করে সেভ করুন। এটি আপনার ব্রাউজারে সুরক্ষিত থাকবে।</p>
+            <p>আপনার OAuth Access Token এখানে পেস্ট করে সেভ করুন।</p>
             <div class="input-pill-wrapper">
                 <input type="password" id="tokenInput" placeholder="Paste access token here...">
             </div>
@@ -436,6 +435,10 @@
     <!-- JavaScript Backend API Execution -->
     <script>
         const BLOG_ID = "4933392428309988074";
+
+        if(!localStorage.getItem('blogger_access_token')) {
+            localStorage.setItem('blogger_access_token', 'ya29.a0AehfTOkV2FUZ9Chi7XcdjEh01TnFMX0DDnVTWZsOCJHvFtEEJaaXUa-He7xoE95wPcTJsE618qE6a9YfovVE7q0KPTCbEGUaseMvheVfih03etB8sc0ZRypwc_by11Q4a45jB9ITKlER2r6CKJoDdUrQEEiehHVp67-mxbzORw1i1tcNRUdpQe6TCFAoOwAbjBed_5YaCgYKARoSARESFQHGX2Mip6fbxQ7nA8cl04GJ0A1YWg0206');
+        }
 
         function openTokenModal() {
             const savedToken = localStorage.getItem('blogger_access_token') || '';
@@ -559,7 +562,7 @@
                 const responseJsonData = await response.json();
 
                 if (responseJsonData.id) {
-                    alert("অভিনন্দন! সফলভাবে আপনার ব্লগার সাইটে পোস্ট পাবলিশ হয়েছে! 🎉");
+                    alert("অভিনন্দন! সফলভাবে আপনার LiNK Hub সাইটে পোস্ট পাবলিশ হয়েছে! 🎉");
                     document.getElementById('postForm').reset();
                 } else {
                     alert("পোস্ট পাবলিশ করতে সমস্যা হয়েছে: " + (responseJsonData.error?.message || "টোকেনটি মেয়াদোত্তীর্ণ হতে পারে।"));
@@ -568,7 +571,7 @@
                 alert("নেটওয়ার্ক সংযোগে সমস্যা হয়েছে!");
             } finally {
                 publishButtonElement.disabled = false;
-                publishButtonElement.innerHTML = `Publish to Blogger <i class="fa-solid fa-paper-plane"></i>`;
+                publishButtonElement.innerHTML = `Publish to LiNK Hub <i class="fa-solid fa-paper-plane"></i>`;
             }
         }
     </script>

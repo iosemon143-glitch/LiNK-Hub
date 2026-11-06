@@ -3,105 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiNK Hub - Viral Collection Admin Panel (Full Edition)</title>
-    <!-- FontAwesome Icons for UI Elements -->
+    <title>LiNK Hub - Viral Collection Admin Panel</title>
+    <!-- FontAwesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* ==========================================================================
-           Global CSS Reset, Variables and Core Styling Layout
-           ========================================================================== */
-        :root {
-            --primary-orange: #ff6b00;
-            --primary-gradient: linear-gradient(135deg, #ff6b00, #ff4500);
-            --bg-body: #f0f2f5;
-            --card-bg: #ffffff;
-            --text-main: #1a1a1a;
-            --text-muted: #777777;
-            --border-color: #eef0f3;
-            --radius-card: 28px;
-            --radius-btn: 22px;
-            --radius-input: 20px;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg-body);
+            background-color: #f0f2f5;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
+            animation: fadeInBody 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInBody {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .card {
-            background: var(--card-bg);
+            background: #ffffff;
             width: 100%;
-            max-width: 500px;
-            border-radius: var(--radius-card);
-            padding: 28px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            max-width: 480px;
+            border-radius: 28px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Header Component */
+        .card:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 26px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            animation: slideDown 0.5s ease 0.1s both;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
         .logo {
-            width: 54px;
-            height: 54px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2.5px solid #ffe8d6;
-            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.15);
+            border: 2px solid #ffe8d6;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .logo:hover {
+            transform: rotate(10deg) scale(1.05);
         }
 
         .brand-text h2 {
-            font-size: 1.35rem;
-            color: var(--text-main);
+            font-size: 1.3rem;
+            color: #1a1a1a;
             font-weight: 800;
-            letter-spacing: -0.5px;
         }
 
         .brand-text p {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            font-weight: 500;
+            font-size: 0.8rem;
+            color: #777;
         }
 
         .target-icon {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: #fff0f0;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ff4747;
-            font-size: 1.1rem;
+            transition: transform 0.3s ease;
         }
 
-        /* Form Controls and Layout Structure */
+        .target-icon:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+            animation: fadeInItem 0.5s ease both;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.15s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.25s; }
+        .form-group:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes fadeInItem {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .label-container {
@@ -112,133 +127,177 @@
         }
 
         label {
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            color: #555555;
-            letter-spacing: 0.6px;
+            color: #666;
+            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 6px;
+            transition: color 0.2s ease;
+        }
+
+        label:hover {
+            color: #ff6b00;
         }
 
         label i {
-            color: var(--primary-orange);
-            font-size: 0.9rem;
+            color: #ff6b00;
+            transition: transform 0.3s ease;
+        }
+
+        label:hover i {
+            transform: scale(1.2);
         }
 
         .file-input-wrapper {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
             align-items: center;
+            transition: transform 0.2s ease;
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 14px 18px;
-            border-radius: var(--radius-input);
-            border: 1.5px solid var(--border-color);
+            padding: 14px 16px;
+            border-radius: 20px;
+            border: 1.5px solid #eef0f3;
             outline: none;
-            font-size: 0.96rem;
+            font-size: 0.95rem;
             background: #fafbfc;
-            color: var(--text-main);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         input[type="text"]:focus {
-            border-color: var(--primary-orange);
-            background: #ffffff;
-            box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.1);
+            border-color: #ff6b00;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.12);
+            transform: translateY(-1px);
         }
 
-        /* Interactive Buttons Style */
         .btn-browse {
-            background: var(--primary-orange);
+            background: #ff6b00;
             color: white;
             border: none;
-            padding: 0 20px;
+            padding: 0 18px;
             height: 48px;
             border-radius: 18px;
             font-weight: 600;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.2);
         }
 
         .btn-browse:hover {
             background: #e05e00;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 0, 0.3);
+        }
+
+        .btn-browse:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(255, 107, 0, 0.2);
         }
 
         .btn-add-light {
             background: #fff3eb;
-            color: var(--primary-orange);
+            color: #ff6b00;
             border: 1px solid #ffd8c2;
-            padding: 6px 14px;
-            border-radius: 14px;
-            font-size: 0.78rem;
-            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .btn-add-light:hover {
-            background: #ffe5d0;
+            background: #ff6b00;
+            color: #ffffff;
+            border-color: #ff6b00;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.2);
+        }
+
+        .btn-add-light:active {
+            transform: translateY(0);
         }
 
         .btn-publish {
             width: 100%;
-            background: var(--primary-gradient);
+            background: linear-gradient(135deg, #ff6b00, #ff4500);
             color: white;
             border: none;
-            padding: 17px;
-            border-radius: var(--radius-btn);
-            font-size: 1.1rem;
+            padding: 16px;
+            border-radius: 22px;
+            font-size: 1.05rem;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 8px 22px rgba(255, 107, 0, 0.35);
-            margin-top: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.25s ease;
-        }
-
-        .btn-publish:hover {
-            opacity: 0.95;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 107, 0, 0.45);
-        }
-
-        /* Alert Status Containers */
-        .token-alert {
-            background: #ffebe9;
-            color: #ff4d4f;
-            padding: 14px 18px;
-            border-radius: 18px;
-            font-size: 0.88rem;
-            font-weight: 600;
-            text-align: center;
-            margin-top: 18px;
-            border: 1px solid #ffccc7;
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.3);
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: pulseGlow 3s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 8px 20px rgba(255, 107, 0, 0.3); }
+            50% { box-shadow: 0 8px 25px rgba(255, 107, 0, 0.5); }
+            100% { box-shadow: 0 8px 20px rgba(255, 107, 0, 0.3); }
+        }
+
+        .btn-publish:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(255, 107, 0, 0.45);
+        }
+
+        .btn-publish:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3);
+        }
+
+        .token-alert {
+            background: #ffebe9;
+            color: #ff4d4f;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 15px;
+            border: 1px solid #ffccc7;
+            animation: shakeAlert 0.5s ease-in-out;
+        }
+
+        @keyframes shakeAlert {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-4px); }
+            40%, 80% { transform: translateX(4px); }
         }
 
         .dynamic-field {
-            margin-top: 10px;
+            margin-top: 8px;
+            animation: expandField 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform-origin: top;
+        }
+
+        @keyframes expandField {
+            from { opacity: 0; transform: scaleY(0.8) translateY(-10px); }
+            to { opacity: 1; transform: scaleY(1) translateY(0); }
         }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <!-- Main Panel Header Component -->
+        <!-- Header -->
         <div class="header">
             <div class="brand">
                 <img src="https://i.postimg.co/g2T5B16V/logo.png" alt="LiNK Hub Logo" class="logo" onerror="this.src='https://via.placeholder.com/50'">
@@ -252,76 +311,73 @@
             </div>
         </div>
 
-        <!-- Master Submission Entry Form -->
+        <!-- Form -->
         <form id="postForm" onsubmit="handlePublish(event)">
-            
-            <!-- Post Title Input Field -->
+            <!-- Post Title -->
             <div class="form-group">
                 <label><i class="fa-solid fa-font"></i> POST TITLE</label>
-                <input type="text" id="postTitle" placeholder="Enter post title here..." required>
+                <input type="text" id="postTitle" placeholder="Enter post title..." required>
             </div>
 
-            <!-- Main Thumbnail Image Input Field -->
+            <!-- Thumbnail Image -->
             <div class="form-group">
                 <label><i class="fa-regular fa-image"></i> THUMBNAIL IMAGE</label>
                 <div class="file-input-wrapper">
-                    <input type="text" id="thumbnailUrl" placeholder="Select thumbnail image or enter link...">
+                    <input type="text" id="thumbnailUrl" placeholder="Select thumbnail image...">
                     <button type="button" class="btn-browse" onclick="triggerFileInput('thumbnailUrl')">Browse</button>
                 </div>
             </div>
 
-            <!-- Additional Dynamic Photos Container Block -->
+            <!-- Additional Photos -->
             <div class="form-group">
                 <div class="label-container">
                     <label><i class="fa-solid fa-images"></i> ADDITIONAL PHOTOS</label>
                     <button type="button" class="btn-add-light" onclick="addNewField('additionalPhotosContainer', 'photo')">+ Add Photo</button>
                 </div>
                 <div id="additionalPhotosContainer">
-                    <div class="file-input-wrapper dynamic-field">
+                    <div class="file-input-wrapper dynamic-field" style="animation-delay: 0.05s; opacity: 1;">
                         <input type="text" class="additional-photo-input" placeholder="Select extra photo...">
                         <button type="button" class="btn-browse" onclick="triggerDynamicFileInput(this)">Browse</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Video Streams Dynamic Container Block -->
+            <!-- Video Streams -->
             <div class="form-group">
                 <div class="label-container">
                     <label><i class="fa-solid fa-video"></i> VIDEO STREAMS</label>
                     <button type="button" class="btn-add-light" onclick="addNewField('videoStreamsContainer', 'video')">+ Add Video</button>
                 </div>
                 <div id="videoStreamsContainer">
-                    <div class="file-input-wrapper dynamic-field">
-                        <input type="text" class="video-stream-input" placeholder="Select video stream or link...">
+                    <div class="file-input-wrapper dynamic-field" style="animation-delay: 0.05s; opacity: 1;">
+                        <input type="text" class="video-stream-input" placeholder="Select video stream...">
                         <button type="button" class="btn-browse" onclick="triggerDynamicFileInput(this)">Browse</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Action Publication Button -->
+            <!-- Submit Button -->
             <button type="submit" class="btn-publish" id="publishBtn">
                 Publish to Blogger <i class="fa-solid fa-paper-plane"></i>
             </button>
         </form>
 
-        <!-- Configuration Access Token Warning Verification Area -->
+        <!-- Access Token Status -->
         <div id="tokenStatus"></div>
     </div>
 
-    <!-- ==========================================================================
-       JavaScript System Execution & API Management Core Layer
-       ========================================================================== -->
+    <!-- JavaScript Logic & API Handling -->
     <script>
-        // আপনার কনফিগারেশন টোকেন ও ব্লগ আইডি এখানে বসাবেন:
+        // =======================================================
+        // আপনার Blogger Access Token এবং Blog ID এখানে বসান
+        // =======================================================
         const BLOGGER_ACCESS_TOKEN = "আপনার_ACCESS_TOKEN_এখানে_দিন";
         const BLOG_ID = "আপনার_BLOG_ID_এখানে_দিন";
 
-        // পেজ সম্পূর্ণ লোড হওয়ার পর টোকেন কনফিগারেশন যাচাই করা
         window.addEventListener('DOMContentLoaded', function() {
             verifyAccessToken();
         });
 
-        // এক্সেস টোকেন ভ্যালিডেশন লজিক ফাংশন
         function verifyAccessToken() {
             const statusContainer = document.getElementById('tokenStatus');
             if (!BLOGGER_ACCESS_TOKEN || BLOGGER_ACCESS_TOKEN.includes("আপনার_") || BLOGGER_ACCESS_TOKEN.trim() === "") {
@@ -333,7 +389,6 @@
             }
         }
 
-        // থাম্বনেইল ফাইল সিলেক্ট করার হার্ডওয়্যার ফাইল রিডার হ্যান্ডলার
         function triggerFileInput(targetElementId) {
             const hiddenFileInput = document.createElement('input');
             hiddenFileInput.type = 'file';
@@ -347,7 +402,6 @@
             hiddenFileInput.click();
         }
 
-        // ডায়নামিক ফাইল ফিল্ডের জন্য ফাইল ব্রাউজ ইভেন্ট হ্যান্ডলার
         function triggerDynamicFileInput(buttonElement) {
             const textInputField = buttonElement.previousElementSibling;
             const hiddenFileInput = document.createElement('input');
@@ -362,7 +416,6 @@
             hiddenFileInput.click();
         }
 
-        // নতুন ফিল্ড বা রো ডাইনামিকালি যুক্ত করার ফাংশন
         function addNewField(containerWrapperId, fieldCategory) {
             const containerBox = document.getElementById(containerWrapperId);
             const wrapperDiv = document.createElement('div');
@@ -378,7 +431,6 @@
             containerBox.appendChild(wrapperDiv);
         }
 
-        // ব্লগার এপিআই এর মাধ্যমে রিমোট পোস্ট পাবলিশিং রিকোয়েস্ট হ্যান্ডলার
         async function handlePublish(submissionEvent) {
             submissionEvent.preventDefault();
 
@@ -390,7 +442,6 @@
             const postTitleText = document.getElementById('postTitle').value.trim();
             const thumbnailSource = document.getElementById('thumbnailUrl').value.trim();
 
-            // সকল অতিরিক্ত ছবির ডাটা ফিল্টার করে সংগ্রহ করা
             const extraPhotoInputsList = document.querySelectorAll('.additional-photo-input');
             let collectedPhotosHtmlCode = '';
             extraPhotoInputsList.forEach(function(field) {
@@ -399,7 +450,6 @@
                 }
             });
 
-            // সকল ভিডিও স্ট্রিমের ডাটা ফিল্টার করে সংগ্রহ করা
             const extraVideoInputsList = document.querySelectorAll('.video-stream-input');
             let collectedVideosHtmlCode = '';
             extraVideoInputsList.forEach(function(field) {
@@ -408,7 +458,6 @@
                 }
             });
 
-            // সম্পূর্ণ পোস্টের ফরম্যাট করা কন্টেন্ট বডি এইচটিএমএল
             const finalPostContentHtml = `
                 <div class="viral-post-body">
                     ${thumbnailSource ? `<p><img src="${thumbnailSource}" alt="Thumbnail" style="max-width:100%; border-radius:12px; margin-bottom:15px;"/></p>` : ''}

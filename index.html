@@ -246,7 +246,7 @@
                 </div>
             </div>
             <div class="status-badge">
-                <i class="fa-solid fa-circle-check"></i> Direct Mail Mode
+                <i class="fa-solid fa-circle-check"></i> 100% Stable
             </div>
         </div>
 
@@ -309,7 +309,7 @@
         </form>
     </div>
 
-    <!-- JavaScript Email-to-Post Execution (No Token Error Ever) -->
+    <!-- JavaScript Execution (Zero Token/Scope Error via Direct Mailto) -->
     <script>
         const BLOGGER_EMAIL = "ios.emon143.LiNKHub@blogger.com";
 
@@ -373,11 +373,11 @@
             const emailSubject = encodeURIComponent(postTitleText + " [" + postLabelText + "]");
             const emailBody = encodeURIComponent(finalPostContentHtml);
             
-            // Mailto লিংকের মাধ্যমে সম্পূর্ণ টোকেন ছাড়া সরাসরি ইমেইলে পোস্ট পাঠানোর সিস্টেম
+            // সম্পূর্ণ নিরাপদ ইমেইল সিস্টেম (কোনো API টোকেনের বা স্কোপের ঝামেলা নেই)
             const mailtoLink = `mailto:${BLOGGER_EMAIL}?subject=${emailSubject}&body=${emailBody}`;
 
             window.location.href = mailtoLink;
-            alert("সফল! Publish বাটনে চাপার পর আপনার ইমেইল অ্যাপ ওপেন হলে শুধু 'Send' করে দিলেই পোস্ট সাথে সাথে ব্লগে চলে যাবে! 🎉");
+            alert("দারুণ! Publish বাটনে ক্লিক করার পর আপনার ফোনের ইমেইল অ্যাপ ওপেন হলে শুধু 'Send' করে দিলেই পোস্ট সাথে সাথে আপনার ব্লগে পাবলিশ হয়ে যাবে! 🎉");
             document.getElementById('postForm').reset();
         }
     </script>

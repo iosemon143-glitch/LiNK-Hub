@@ -9,13 +9,13 @@
     <style>
         :root {
             --primary-orange: #ff6600;
-            --orange-gradient: linear-gradient(180deg, #ff7a18 0%, #ff5200 100%);
-            --bg-body: #f4f7fb;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-label: #e65c00;
-            --border-color: #e2e8f0;
-            --radius-card: 32px;
+            --orange-gradient: linear-gradient(135deg, #ff7a18 0%, #ff5200 100%);
+            --bg-body: #0b0f19;
+            --card-bg: #131b2e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #1e293b;
+            --radius-card: 28px;
             --radius-pill: 50px;
         }
 
@@ -34,12 +34,6 @@
             align-items: center;
             min-height: 100vh;
             padding: 16px;
-            animation: fadeInBody 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes fadeInBody {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
         }
 
         .card {
@@ -47,48 +41,38 @@
             width: 100%;
             max-width: 440px;
             border-radius: var(--radius-card);
-            padding: 26px 22px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            padding: 28px 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
             position: relative;
-            animation: slideUpCard 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-        }
-
-        @keyframes slideUpCard {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 24px;
+            margin-bottom: 26px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 18px;
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .logo-box {
-            width: 52px;
-            height: 52px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: #fff6ee;
-            border: 2px solid #ffe3d1;
+            background: #1e293b;
+            border: 2px solid #ff6600;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-orange);
-            font-size: 1.4rem;
-            box-shadow: 0 4px 12px rgba(255, 102, 0, 0.12);
             overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .logo-box:hover {
-            transform: scale(1.08) rotate(6deg);
+            box-shadow: 0 0 15px rgba(255, 102, 0, 0.3);
         }
 
         .logo-box img {
@@ -98,39 +82,30 @@
         }
 
         .brand-text h2 {
-            font-size: 1.4rem;
-            color: #0f172a;
+            font-size: 1.35rem;
+            color: var(--text-main);
             font-weight: 800;
-            letter-spacing: -0.4px;
-            line-height: 1.1;
+            letter-spacing: -0.3px;
         }
 
         .brand-text p {
-            font-size: 0.82rem;
-            color: #64748b;
-            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
             margin-top: 2px;
         }
 
-        .target-icon {
-            width: 42px;
-            height: 42px;
-            background: #ffebeb;
-            border-radius: 50%;
+        .status-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            padding: 6px 14px;
+            border-radius: var(--radius-pill);
+            font-size: 0.75rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: #ff3b3b;
-            font-size: 1.1rem;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 4px 12px rgba(255, 59, 59, 0.2);
-            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .target-icon:hover {
-            transform: scale(1.15) rotate(15deg);
-            background: #ffd6d6;
+            gap: 6px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
         }
 
         .form-group {
@@ -145,9 +120,9 @@
         }
 
         label {
-            font-size: 0.72rem;
-            font-weight: 800;
-            color: var(--text-label);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
             letter-spacing: 0.8px;
             display: flex;
             align-items: center;
@@ -156,72 +131,75 @@
         }
 
         .input-pill-wrapper {
-            background: #ffffff;
-            border: 1.5px solid #eef2f6;
+            background: #0b0f19;
+            border: 1.5px solid var(--border-color);
             border-radius: var(--radius-pill);
-            padding: 4px;
+            padding: 4px 6px;
             display: flex;
             align-items: center;
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01);
-            transition: border-color 0.2s;
+            transition: all 0.25s ease;
         }
 
         .input-pill-wrapper:focus-within {
             border-color: var(--primary-orange);
-            box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.1);
+            box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.15);
         }
 
         .input-icon-inside {
             color: var(--primary-orange);
-            font-size: 1.1rem;
-            margin-left: 14px;
-            margin-right: 4px;
+            font-size: 1rem;
+            margin-left: 12px;
+            margin-right: 6px;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"] {
             width: 100%;
-            padding: 12px 14px;
+            padding: 10px 12px;
             border: none;
             outline: none;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             background: transparent;
             color: var(--text-main);
             font-weight: 500;
         }
 
         input::placeholder {
-            color: #94a3b8;
-            font-weight: 400;
+            color: #475569;
         }
 
-        .btn-browse {
+        .btn-action {
             background: var(--orange-gradient);
             color: white;
             border: none;
-            padding: 0 22px;
-            height: 44px;
+            padding: 0 18px;
+            height: 40px;
             border-radius: var(--radius-pill);
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
             white-space: nowrap;
+            transition: transform 0.15s, opacity 0.2s;
             box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
-            transition: transform 0.15s;
         }
 
-        .btn-browse:active {
-            transform: scale(0.97);
+        .btn-action:active {
+            transform: scale(0.96);
         }
 
         .btn-add-light {
-            background: #fff3eb;
+            background: rgba(255, 102, 0, 0.1);
             color: var(--primary-orange);
-            border: none;
-            padding: 6px 14px;
+            border: 1px solid rgba(255, 102, 0, 0.2);
+            padding: 5px 12px;
             border-radius: var(--radius-pill);
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             font-weight: 700;
             cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-add-light:hover {
+            background: rgba(255, 102, 0, 0.2);
         }
 
         .btn-publish {
@@ -229,112 +207,27 @@
             background: var(--orange-gradient);
             color: white;
             border: none;
-            padding: 16px;
+            padding: 15px;
             border-radius: var(--radius-pill);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 8px 24px rgba(255, 102, 0, 0.35);
-            margin-top: 14px;
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.4);
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: all 0.2s ease;
-            animation: pulseGlow 3s infinite;
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 8px 24px rgba(255, 102, 0, 0.35); }
-            50% { box-shadow: 0 8px 30px rgba(255, 102, 0, 0.55); }
-            100% { box-shadow: 0 8px 24px rgba(255, 102, 0, 0.35); }
+            transition: all 0.25s ease;
         }
 
         .btn-publish:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(255, 102, 0, 0.5);
+            box-shadow: 0 12px 30px rgba(255, 102, 0, 0.6);
         }
 
         .dynamic-field {
             margin-top: 10px;
-        }
-
-        /* Modal Popup */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(5px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-box {
-            background: white;
-            width: 90%;
-            max-width: 380px;
-            border-radius: 24px;
-            padding: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .modal-overlay.active .modal-box {
-            transform: scale(1);
-        }
-
-        .modal-box h3 {
-            font-size: 1.1rem;
-            color: #0f172a;
-            margin-bottom: 8px;
-            font-weight: 800;
-        }
-
-        .modal-box p {
-            font-size: 0.82rem;
-            color: #64748b;
-            margin-bottom: 16px;
-        }
-
-        .modal-btns {
-            display: flex;
-            gap: 10px;
-            margin-top: 16px;
-        }
-
-        .btn-modal-save {
-            flex: 1;
-            background: var(--orange-gradient);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 14px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .btn-modal-cancel {
-            background: #f1f5f9;
-            color: #64748b;
-            border: none;
-            padding: 12px 16px;
-            border-radius: 14px;
-            font-weight: 700;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -345,29 +238,28 @@
         <div class="header">
             <div class="brand">
                 <div class="logo-box">
-                    <img src="https://archive.org/download/20261031-043559/20261031_043559.png" alt="Logo"[cite: 7] onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <i class="fa-solid fa-truck-pickup" style="display:none;"></i>
+                    <img src="https://archive.org/download/20261031-043559/20261031_043559.png" alt="Logo" onerror="this.style.display='none';">
                 </div>
                 <div class="brand-text">
                     <h2>LiNK Hub</h2>
-                    <p>Viral Collection</p>
+                    <p>Viral Collection Admin</p>
                 </div>
             </div>
-            <!-- Target Icon Button for Access Token -->
-            <button type="button" class="target-icon" onclick="openTokenModal()" title="Configure Access Token">
-                <i class="fa-solid fa-bullseye"></i>
-            </button>
+            <!-- Status Badge -->
+            <div class="status-badge">
+                <i class="fa-solid fa-circle-check"></i> Connected
+            </div>
         </div>
 
         <!-- Form -->
         <form id="postForm" onsubmit="handlePublish(event)">
             
-            <!-- Post Title with Label Button on Right -->
+            <!-- Post Title with Label Button -->
             <div class="form-group">
-                <label><i class="fa-solid fa-pen"></i> Post Title</label>
+                <label><i class="fa-solid fa-heading"></i> Post Title</label>
                 <div class="input-pill-wrapper">
                     <input type="text" id="postTitle" placeholder="Enter post title..." required>
-                    <button type="button" class="btn-browse" onclick="promptLabel()" title="Add Post Label" style="margin-right: 2px;">
+                    <button type="button" class="btn-action" onclick="promptLabel()" style="margin-right: 2px;">
                         <i class="fa-solid fa-tags"></i> Label
                     </button>
                 </div>
@@ -378,9 +270,8 @@
             <div class="form-group">
                 <label><i class="fa-regular fa-image"></i> Post Image</label>
                 <div class="input-pill-wrapper">
-                    <i class="fa-solid fa-cloud-arrow-up input-icon-inside"></i>
-                    <input type="text" id="thumbnailUrl" placeholder="Select post image link or file...">
-                    <button type="button" class="btn-browse" onclick="triggerFileInput('thumbnailUrl')">Browse</button>
+                    <i class="fa-solid fa-link input-icon-inside"></i>
+                    <input type="text" id="thumbnailUrl" placeholder="Paste direct image URL...">
                 </div>
             </div>
 
@@ -393,8 +284,7 @@
                 <div id="additionalPhotosContainer">
                     <div class="input-pill-wrapper dynamic-field">
                         <i class="fa-regular fa-image input-icon-inside"></i>
-                        <input type="text" class="additional-photo-input" placeholder="Select extra photo link...">
-                        <button type="button" class="btn-browse" onclick="triggerDynamicFileInput(this)">Browse</button>
+                        <input type="text" class="additional-photo-input" placeholder="Paste extra photo URL...">
                     </div>
                 </div>
             </div>
@@ -408,8 +298,7 @@
                 <div id="videoStreamsContainer">
                     <div class="input-pill-wrapper dynamic-field">
                         <i class="fa-solid fa-video input-icon-inside"></i>
-                        <input type="text" class="video-stream-input" placeholder="Select video stream link...">
-                        <button type="button" class="btn-browse" onclick="triggerDynamicFileInput(this)">Browse</button>
+                        <input type="text" class="video-stream-input" placeholder="Paste video direct URL...">
                     </div>
                 </div>
             </div>
@@ -421,72 +310,17 @@
         </form>
     </div>
 
-    <!-- Token Settings Modal -->
-    <div class="modal-overlay" id="tokenModal">
-        <div class="modal-box">
-            <h3>Blogger Access Token</h3>
-            <p>আপনার OAuth Access Token এখানে পেস্ট করে সেভ করুন।</p>
-            <div class="input-pill-wrapper">
-                <input type="password" id="tokenInput" placeholder="Paste access token here...">
-            </div>
-            <div class="modal-btns">
-                <button type="button" class="btn-modal-cancel" onclick="closeTokenModal()">Cancel</button>
-                <button type="button" class="btn-modal-save" onclick="saveToken()">Save Token</button>
-            </div>
-        </div>
-    </div>
-
     <!-- JavaScript Backend API Execution -->
     <script>
         const BLOG_ID = "4933392428309988074";
-
-        if(!localStorage.getItem('blogger_access_token')) {
-            localStorage.setItem('blogger_access_token', 'ya29.a0AehfTOkV2FUZ9Chi7XcdjEh01TnFMX0DDnVTWZsOCJHvFtEEJaaXUa-He7xoE95wPcTJsE618qE6a9YfovVE7q0KPTCbEGUaseMvheVfih03etB8sc0ZRypwc_by11Q4a45jB9ITKlER2r6CKJoDdUrQEEiehHVp67-mxbzORw1i1tcNRUdpQe6TCFAoOwAbjBed_5YaCgYKARoSARESFQHGX2Mip6fbxQ7nA8cl04GJ0A1YWg0206');
-        }
-
-        function openTokenModal() {
-            const savedToken = localStorage.getItem('blogger_access_token') || '';
-            document.getElementById('tokenInput').value = savedToken;
-            document.getElementById('tokenModal').classList.add('active');
-        }
-
-        function closeTokenModal() {
-            document.getElementById('tokenModal').classList.remove('active');
-        }
-
-        function saveToken() {
-            const tokenValue = document.getElementById('tokenInput').value.trim();
-            if(tokenValue) {
-                localStorage.setItem('blogger_access_token', tokenValue);
-                alert("Access Token সফলভাবে সেভ হয়েছে! 🎉");
-                closeTokenModal();
-            } else {
-                alert("দয়া করে একটি ভ্যালিড টোকেন দিন।");
-            }
-        }
+        const ACCESS_TOKEN = "ya29.a0AehfTOnho0XLojy0AL_INxxNKga-P_2S9e-v6gHCfENwAZWBGkcJWd6uZ6j-mVHxUr4vz9m4U3n0mOoa9mEXRfKIW7egxTakTW-1VL0NSdhEgjHMw1G3ymC8bYyYoRlquFNwxXKUTXjpt_EtvntstNUecI7PtRH_UBgbKRF5QuC9R1GeK31f6IjyRg6W6lzXLg5LhrEaCgYKAVcSARESFQHGX2Mip6RcAOjZUebS6FuxCG3fSw0206";
 
         function promptLabel() {
             const currentLabel = document.getElementById('postLabel').value;
             const newLabel = prompt("পোস্টের জন্য লেবেল বা ক্যাটাগরি লিখুন:", currentLabel);
-            if(newLabel !== null) {
+            if(newLabel !== null && newLabel.trim() !== "") {
                 document.getElementById('postLabel').value = newLabel.trim();
-                alert("লেবেল সেট করা হয়েছে: " + newLabel);
-            }
-        }
-
-        function triggerFileInput(targetElementId) {
-            const inputField = document.getElementById(targetElementId);
-            const userUrl = prompt("ছবির সরাসরি লিংক (URL) দিন অথবা ফাইল সিলেক্ট করুন:", inputField.value);
-            if(userUrl !== null) {
-                inputField.value = userUrl.trim();
-            }
-        }
-
-        function triggerDynamicFileInput(buttonElement) {
-            const textInputField = buttonElement.previousElementSibling;
-            const userUrl = prompt("এক্সট্রা ছবি বা ভিডিওর সরাসরি লিংক (URL) দিন:", textInputField.value);
-            if(userUrl !== null) {
-                textInputField.value = userUrl.trim();
+                alert("লেবেল সফলভাবে সেট হয়েছে: " + newLabel);
             }
         }
 
@@ -496,26 +330,18 @@
             wrapperDiv.className = 'input-pill-wrapper dynamic-field';
             
             const iconClass = fieldCategory === 'photo' ? 'fa-regular fa-image' : 'fa-solid fa-video';
-            const inputPlaceholderText = fieldCategory === 'photo' ? 'Select extra photo link...' : 'Select video stream link...';
+            const inputPlaceholderText = fieldCategory === 'photo' ? 'Paste extra photo URL...' : 'Paste video direct URL...';
             const specificInputClassName = fieldCategory === 'photo' ? 'additional-photo-input' : 'video-stream-input';
 
             wrapperDiv.innerHTML = `
                 <i class="${iconClass} input-icon-inside"></i>
                 <input type="text" class="${specificInputClassName}" placeholder="${inputPlaceholderText}">
-                <button type="button" class="btn-browse" onclick="triggerDynamicFileInput(this)">Browse</button>
             `;
             containerBox.appendChild(wrapperDiv);
         }
 
         async function handlePublish(submissionEvent) {
             submissionEvent.preventDefault();
-
-            const ACCESS_TOKEN = localStorage.getItem('blogger_access_token');
-            if(!ACCESS_TOKEN) {
-                alert("দয়া করে ওপরের ডানপাশের 🎯 (Target) আইকনে ক্লিক করে আপনার Blogger Access Token সেট করে নিন!");
-                openTokenModal();
-                return;
-            }
 
             const postTitleText = document.getElementById('postTitle').value.trim();
             const postLabelText = document.getElementById('postLabel').value.trim() || "Trending Link";
@@ -525,7 +351,7 @@
             let collectedPhotosHtmlCode = '';
             extraPhotoInputsList.forEach(function(field) {
                 if (field.value.trim() !== '') {
-                    collectedPhotosHtmlCode += `<div style="margin-bottom:15px;"><img src="${field.value}" alt="Photo" style="width:100%; border-radius:18px; object-fit:cover;"/></div>`;
+                    collectedPhotosHtmlCode += `<div style="margin-bottom:15px;"><img src="${field.value.trim()}" alt="Photo" style="width:100%; border-radius:18px; object-fit:cover;"/></div>`;
                 }
             });
 
@@ -533,11 +359,10 @@
             let collectedVideosHtmlCode = '';
             extraVideoInputsList.forEach(function(field) {
                 if (field.value.trim() !== '') {
-                    collectedVideosHtmlCode += `<div style="margin-bottom:15px;"><video controls style="width:100%; border-radius:18px;"><source src="${field.value}" type="video/mp4"></video></div>`;
+                    collectedVideosHtmlCode += `<div style="margin-bottom:15px;"><video controls style="width:100%; border-radius:18px;"><source src="${field.value.trim()}" type="video/mp4"></video></div>`;
                 }
             });
 
-            // প্রফেশনাল কার্ড ডিজাইন HTML যা ব্লগে শো করবে
             const finalPostContentHtml = `
                 <div class="viral-post-container" style="background:#1a1025; padding:20px; border-radius:24px; color:#fff; max-width:400px; margin:auto; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
                     <h2 style="text-align:center; margin-bottom:15px; font-size:1.3rem; color:#fff;">${postTitleText}</h2>
@@ -571,12 +396,12 @@
                     alert("অভিনন্দন! সফলভাবে আপনার LiNK Hub সাইটে পোস্ট পাবলিশ হয়েছে! 🎉");
                     document.getElementById('postForm').reset();
                 } else {
-                    alert("পোস্ট পাবলিশ করতে সমস্যা হয়েছে: " + (responseJsonData.error?.message || "টোকেনটি মেয়াদোত্তীর্ণ হতে পারে।"));
+                    alert("পোস্ট পাবলিশ করতে সমস্যা হয়েছে: " + (responseJsonData.error?.message || "দয়া করে সঠিক ডিরেক্ট URL ব্যবহার করুন।"));
                 }
             } catch (networkError) {
                 alert("নেটওয়ার্ক সংযোগে সমস্যা হয়েছে!");
             } finally {
-                publishButtonElement.disabled, publishButtonElement.disabled = false;
+                publishButtonElement.disabled = false;
                 publishButtonElement.innerHTML = `Publish to LiNK Hub <i class="fa-solid fa-paper-plane"></i>`;
             }
         }

@@ -3,38 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiNK Hub - Viral Collection</title>
-    <!-- FontAwesome Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>LiNK Hub - Viral Collection Admin</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-orange: #ff6b00;
-            --primary-gradient: linear-gradient(135deg, #ff6b00, #ff4500);
-            --bg-body: #f0f4f8;
+            --primary-orange: #ff5e00;
+            --primary-gradient: linear-gradient(135deg, #ff6b00 0%, #ff3700 100%);
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             --card-bg: #ffffff;
-            --text-main: #1a1a1a;
-            --text-muted: #777777;
-            --border-color: #eee;
-            --radius-main: 32px;
-            --radius-btn: 24px;
-            --radius-input: 22px;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --border-color: #e2e8f0;
+            --radius-main: 28px;
+            --radius-inner: 16px;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg-body);
+            background: var(--bg-gradient);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 15px;
+            padding: 16px;
             animation: fadeInBody 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
@@ -46,23 +47,38 @@
         .card {
             background: var(--card-bg);
             width: 100%;
-            max-width: 480px;
+            max-width: 460px;
             border-radius: var(--radius-main);
-            padding: 28px 24px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 28px 22px;
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.03);
             animation: slideUpCard 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card:hover {
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.09);
+        @keyframes slideUpCard {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-gradient);
+        }
+
+        /* Header UI */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 26px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
             animation: fadeInItem 0.5s ease 0.1s both;
         }
 
@@ -72,57 +88,60 @@
             gap: 14px;
         }
 
-        .logo {
+        .logo-box {
             width: 52px;
             height: 52px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #ffe8d6;
+            background: linear-gradient(135deg, #fff3eb, #ffe0d0);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-orange);
+            font-size: 1.4rem;
+            box-shadow: 0 8px 16px rgba(255, 94, 0, 0.15);
+            border: 2px solid #fff;
             transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .logo:hover {
-            transform: scale(1.08) rotate(5deg);
+        .logo-box:hover {
+            transform: scale(1.08) rotate(6deg);
         }
 
         .brand-text h2 {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             color: var(--text-main);
             font-weight: 800;
-            letter-spacing: -0.5px;
-            transition: color 0.3s ease;
-        }
-
-        .brand-text h2:hover {
-            color: var(--primary-orange);
+            letter-spacing: -0.4px;
         }
 
         .brand-text p {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            font-weight: 500;
+            font-size: 0.78rem;
+            color: var(--text-sub);
+            font-weight: 600;
+            margin-top: 2px;
         }
 
         .target-icon {
             width: 40px;
             height: 40px;
-            background: #fff0f0;
-            border-radius: 50%;
+            background: #fff5f2;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ff4747;
             font-size: 1.1rem;
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+            border: 1px solid #ffdcd6;
+            transition: transform 0.3s ease;
         }
 
         .target-icon:hover {
             transform: scale(1.15) rotate(15deg);
-            background: #ffe0e0;
         }
 
+        /* Form Controls */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             animation: fadeInItem 0.5s ease both;
         }
 
@@ -132,7 +151,7 @@
         .form-group:nth-child(4) { animation-delay: 0.3s; }
 
         @keyframes fadeInItem {
-            from { opacity: 0; transform: translateY(12px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -144,14 +163,15 @@
         }
 
         label {
-            font-size: 0.75rem;
+            font-size: 0.73rem;
             font-weight: 800;
-            color: #555;
+            color: #475569;
             letter-spacing: 0.7px;
             display: flex;
             align-items: center;
             gap: 6px;
-            transition: color 0.25s ease;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
         }
 
         label:hover {
@@ -177,12 +197,13 @@
 
         input[type="text"] {
             width: 100%;
-            padding: 15px 18px;
-            border-radius: var(--radius-input);
+            padding: 14px 16px;
+            border-radius: var(--radius-inner);
             border: 1.5px solid var(--border-color);
             outline: none;
-            font-size: 0.95rem;
-            background: #fafbfc;
+            font-size: 0.93rem;
+            font-weight: 500;
+            background: #f8fafc;
             color: var(--text-main);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -190,43 +211,42 @@
         input[type="text"]:focus {
             border-color: var(--primary-orange);
             background: #ffffff;
-            box-shadow: 0 0 0 5px rgba(255, 107, 0, 0.1);
+            box-shadow: 0 0 0 4px rgba(255, 94, 0, 0.12);
             transform: translateY(-1px);
         }
 
+        /* Buttons Styling with Smooth Animation */
         .btn-browse {
-            background: var(--primary-orange);
+            background: var(--primary-gradient);
             color: white;
             border: none;
-            padding: 0 20px;
-            height: 50px;
-            border-radius: 18px;
+            padding: 0 18px;
+            height: 48px;
+            border-radius: var(--radius-inner);
             font-weight: 700;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.25);
+            box-shadow: 0 4px 12px rgba(255, 94, 0, 0.25);
         }
 
         .btn-browse:hover {
-            background: #e05e00;
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(255, 107, 0, 0.35);
+            box-shadow: 0 6px 18px rgba(255, 94, 0, 0.35);
         }
 
         .btn-browse:active {
             transform: translateY(0);
-            box-shadow: 0 2px 6px rgba(255, 107, 0, 0.2);
         }
 
         .btn-add-light {
             background: #fff3eb;
             color: var(--primary-orange);
             border: 1px solid #ffd8c2;
-            padding: 6px 14px;
-            border-radius: 14px;
-            font-size: 0.76rem;
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 0.74rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -237,7 +257,7 @@
             color: #ffffff;
             border-color: var(--primary-orange);
             transform: translateY(-1px);
-            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.25);
+            box-shadow: 0 4px 10px rgba(255, 94, 0, 0.25);
         }
 
         .btn-add-light:active {
@@ -249,13 +269,13 @@
             background: var(--primary-gradient);
             color: white;
             border: none;
-            padding: 17px;
-            border-radius: var(--radius-btn);
-            font-size: 1.08rem;
+            padding: 16px;
+            border-radius: var(--radius-inner);
+            font-size: 1.05rem;
             font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 8px 22px rgba(255, 107, 0, 0.35);
-            margin-top: 12px;
+            box-shadow: 0 8px 22px rgba(255, 94, 0, 0.35);
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -265,19 +285,18 @@
         }
 
         @keyframes pulseGlow {
-            0% { box-shadow: 0 8px 22px rgba(255, 107, 0, 0.35); }
-            50% { box-shadow: 0 8px 28px rgba(255, 107, 0, 0.55); }
-            100% { box-shadow: 0 8px 22px rgba(255, 107, 0, 0.35); }
+            0% { box-shadow: 0 8px 22px rgba(255, 94, 0, 0.35); }
+            50% { box-shadow: 0 8px 28px rgba(255, 94, 0, 0.55); }
+            100% { box-shadow: 0 8px 22px rgba(255, 94, 0, 0.35); }
         }
 
         .btn-publish:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(255, 107, 0, 0.5);
+            box-shadow: 0 12px 30px rgba(255, 94, 0, 0.5);
         }
 
         .btn-publish:active {
             transform: translateY(0);
-            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
         }
 
         .dynamic-field {
@@ -296,10 +315,12 @@
 <body>
 
     <div class="card">
-        <!-- Header Section -->
+        <!-- Header Component -->
         <div class="header">
             <div class="brand">
-                <img src="https://i.postimg.co/g2T5B16V/logo.png" alt="LiNK Hub Logo" class="logo" onerror="this.src='https://via.placeholder.com/50'">
+                <div class="logo-box">
+                    <i class="fa-solid fa-bolt-lightning"></i>
+                </div>
                 <div class="brand-text">
                     <h2>LiNK Hub</h2>
                     <p>Viral Collection</p>
@@ -310,28 +331,28 @@
             </div>
         </div>
 
-        <!-- Main Submission Form -->
+        <!-- Main Form -->
         <form id="postForm" onsubmit="handlePublish(event)">
             
-            <!-- Post Title Field -->
+            <!-- Post Title -->
             <div class="form-group">
-                <label><i class="fa-solid fa-font"></i> POST TITLE</label>
+                <label><i class="fa-solid fa-pen-nib"></i> Post Title</label>
                 <input type="text" id="postTitle" placeholder="Enter post title..." required>
             </div>
 
-            <!-- Thumbnail Image Field -->
+            <!-- Thumbnail Image -->
             <div class="form-group">
-                <label><i class="fa-regular fa-image"></i> THUMBNAIL IMAGE</label>
+                <label><i class="fa-regular fa-image"></i> Thumbnail Image</label>
                 <div class="file-input-wrapper">
                     <input type="text" id="thumbnailUrl" placeholder="Select thumbnail image...">
                     <button type="button" class="btn-browse" onclick="triggerFileInput('thumbnailUrl')">Browse</button>
                 </div>
             </div>
 
-            <!-- Additional Photos Container -->
+            <!-- Additional Photos -->
             <div class="form-group">
                 <div class="label-container">
-                    <label><i class="fa-solid fa-images"></i> ADDITIONAL PHOTOS</label>
+                    <label><i class="fa-solid fa-images"></i> Additional Photos</label>
                     <button type="button" class="btn-add-light" onclick="addNewField('additionalPhotosContainer', 'photo')">+ Add Photo</button>
                 </div>
                 <div id="additionalPhotosContainer">
@@ -342,10 +363,10 @@
                 </div>
             </div>
 
-            <!-- Video Streams Container -->
+            <!-- Video Streams -->
             <div class="form-group">
                 <div class="label-container">
-                    <label><i class="fa-solid fa-video"></i> VIDEO STREAMS</label>
+                    <label><i class="fa-solid fa-video"></i> Video Streams</label>
                     <button type="button" class="btn-add-light" onclick="addNewField('videoStreamsContainer', 'video')">+ Add Video</button>
                 </div>
                 <div id="videoStreamsContainer">
@@ -356,16 +377,15 @@
                 </div>
             </div>
 
-            <!-- Publish Action Button -->
+            <!-- Publish Button -->
             <button type="submit" class="btn-publish" id="publishBtn">
                 Publish to Blogger <i class="fa-solid fa-paper-plane"></i>
             </button>
         </form>
     </div>
 
-    <!-- JavaScript Core Logic -->
+    <!-- JavaScript Execution -->
     <script>
-        // আপনার টোকেন এবং ব্লগ আইডি এখানে স্থায়ীভাবে যুক্ত আছে
         const BLOGGER_ACCESS_TOKEN = "KIeHeeXhVhgCJax9xMyk485anVSVViT1";
         const BLOG_ID = "4933392428309988074";
 

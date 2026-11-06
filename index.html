@@ -362,12 +362,17 @@
         <!-- Form -->
         <form id="postForm" onsubmit="handlePublish(event)">
             
-            <!-- Post Title -->
+            <!-- Post Title with Label Button on Right -->
             <div class="form-group">
                 <label><i class="fa-solid fa-pen"></i> Post Title</label>
                 <div class="input-pill-wrapper">
                     <input type="text" id="postTitle" placeholder="Enter post title..." required>
+                    <button type="button" class="btn-browse" onclick="promptLabel()" title="Add Post Label" style="margin-right: 2px;">
+                        <i class="fa-solid fa-tags"></i> Label
+                    </button>
                 </div>
+                <!-- Hidden input to store label value -->
+                <input type="hidden" id="postLabel" value="Viral">
             </div>
 
             <!-- Post Image -->
@@ -461,6 +466,15 @@
             }
         }
 
+        function promptLabel() {
+            const currentLabel = document.getElementById('postLabel').value;
+            const newLabel = prompt("পোস্টের জন্য লেবেল বা ক্যাটাগরি লিখুন (কমা দিয়ে একাধিক দিতে পারেন):", currentLabel);
+            if(newLabel !== null) {
+                document.getElementById('postLabel').value = newLabel.trim();
+                alert("লেবেল সেট করা হয়েছে: " + newLabel);
+            }
+        }
+
         function triggerFileInput(targetElementId) {
             const hiddenFileInput = document.createElement('input');
             hiddenFileInput.type = 'file';
@@ -516,6 +530,7 @@
             }
 
             const postTitleText = document.getElementById('postTitle').value.trim();
+            const postLabelsValue = document.getElementById('postLabel').value.split(',').map(l => l.trim()).filter(l => l);
             const thumbnailSource = document.getElementById('thumbnailUrl').value.trim();
 
             const extraPhotoInputsList = document.querySelectorAll('.additional-photo-input');
@@ -555,7 +570,8 @@
                     },
                     body: JSON.stringify({
                         title: postTitleText,
-                        content: finalPostContentHtml
+                        content: finalPostContentHtml,
+                        labels: postLabelsValue
                     })
                 });
 

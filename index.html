@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiNK Hub - Viral Collection Admin Panel</title>
+    <title>LiNK Hub - Viral Collection</title>
     <!-- FontAwesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-orange: #ff6b00;
+            --primary-gradient: linear-gradient(135deg, #ff6b00, #ff4500);
+            --bg-body: #f0f4f8;
+            --card-bg: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #777777;
+            --border-color: #eee;
+            --radius-main: 32px;
+            --radius-btn: 24px;
+            --radius-input: 22px;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -16,7 +29,7 @@
         }
 
         body {
-            background-color: #f0f2f5;
+            background-color: var(--bg-body);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -31,42 +44,43 @@
         }
 
         .card {
-            background: #ffffff;
+            background: var(--card-bg);
             width: 100%;
             max-width: 480px;
-            border-radius: 28px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transform: translateY(0);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: var(--radius-main);
+            padding: 28px 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: slideUpCard 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes slideUpCard {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .card:hover {
-            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.09);
         }
 
+        /* Header UI Component */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 24px;
-            animation: slideDown 0.5s ease 0.1s both;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            margin-bottom: 26px;
+            animation: fadeInItem 0.5s ease 0.1s both;
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .logo {
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #ffe8d6;
@@ -74,38 +88,48 @@
         }
 
         .logo:hover {
-            transform: rotate(10deg) scale(1.05);
+            transform: scale(1.08) rotate(5deg);
         }
 
         .brand-text h2 {
-            font-size: 1.3rem;
-            color: #1a1a1a;
+            font-size: 1.35rem;
+            color: var(--text-main);
             font-weight: 800;
+            letter-spacing: -0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .brand-text h2:hover {
+            color: var(--primary-orange);
         }
 
         .brand-text p {
-            font-size: 0.8rem;
-            color: #777;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
         .target-icon {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             background: #fff0f0;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ff4747;
-            transition: transform 0.3s ease;
+            font-size: 1.1rem;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
         }
 
         .target-icon:hover {
-            transform: scale(1.1) rotate(15deg);
+            transform: scale(1.15) rotate(15deg);
+            background: #ffe0e0;
         }
 
+        /* Form Group Styles */
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             animation: fadeInItem 0.5s ease both;
         }
 
@@ -115,7 +139,7 @@
         .form-group:nth-child(4) { animation-delay: 0.3s; }
 
         @keyframes fadeInItem {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -128,21 +152,22 @@
 
         label {
             font-size: 0.75rem;
-            font-weight: 700;
-            color: #666;
-            letter-spacing: 0.5px;
+            font-weight: 800;
+            color: #555;
+            letter-spacing: 0.7px;
             display: flex;
             align-items: center;
             gap: 6px;
-            transition: color 0.2s ease;
+            transition: color 0.25s ease;
         }
 
         label:hover {
-            color: #ff6b00;
+            color: var(--primary-orange);
         }
 
         label i {
-            color: #ff6b00;
+            color: var(--primary-orange);
+            font-size: 0.85rem;
             transition: transform 0.3s ease;
         }
 
@@ -152,74 +177,75 @@
 
         .file-input-wrapper {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             width: 100%;
             align-items: center;
-            transition: transform 0.2s ease;
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 14px 16px;
-            border-radius: 20px;
-            border: 1.5px solid #eef0f3;
+            padding: 15px 18px;
+            border-radius: var(--radius-input);
+            border: 1.5px solid var(--border-color);
             outline: none;
             font-size: 0.95rem;
             background: #fafbfc;
+            color: var(--text-main);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         input[type="text"]:focus {
-            border-color: #ff6b00;
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.12);
+            border-color: var(--primary-orange);
+            background: #ffffff;
+            box-shadow: 0 0 0 5px rgba(255, 107, 0, 0.1);
             transform: translateY(-1px);
         }
 
+        /* Buttons Animation & Design */
         .btn-browse {
-            background: #ff6b00;
+            background: var(--primary-orange);
             color: white;
             border: none;
-            padding: 0 18px;
-            height: 48px;
+            padding: 0 20px;
+            height: 50px;
             border-radius: 18px;
-            font-weight: 600;
-            font-size: 0.85rem;
+            font-weight: 700;
+            font-size: 0.88rem;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
-            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.25);
         }
 
         .btn-browse:hover {
             background: #e05e00;
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(255, 107, 0, 0.3);
+            box-shadow: 0 6px 18px rgba(255, 107, 0, 0.35);
         }
 
         .btn-browse:active {
             transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(255, 107, 0, 0.2);
+            box-shadow: 0 2px 6px rgba(255, 107, 0, 0.2);
         }
 
         .btn-add-light {
             background: #fff3eb;
-            color: #ff6b00;
+            color: var(--primary-orange);
             border: 1px solid #ffd8c2;
-            padding: 5px 12px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 14px;
+            font-size: 0.76rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .btn-add-light:hover {
-            background: #ff6b00;
+            background: var(--primary-orange);
             color: #ffffff;
-            border-color: #ff6b00;
+            border-color: var(--primary-orange);
             transform: translateY(-1px);
-            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.25);
         }
 
         .btn-add-light:active {
@@ -228,50 +254,55 @@
 
         .btn-publish {
             width: 100%;
-            background: linear-gradient(135deg, #ff6b00, #ff4500);
+            background: var(--primary-gradient);
             color: white;
             border: none;
-            padding: 16px;
-            border-radius: 22px;
-            font-size: 1.05rem;
-            font-weight: 700;
+            padding: 17px;
+            border-radius: var(--radius-btn);
+            font-size: 1.08rem;
+            font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.3);
-            margin-top: 10px;
+            box-shadow: 0 8px 22px rgba(255, 107, 0, 0.35);
+            margin-top: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             animation: pulseGlow 3s infinite;
         }
 
         @keyframes pulseGlow {
-            0% { box-shadow: 0 8px 20px rgba(255, 107, 0, 0.3); }
-            50% { box-shadow: 0 8px 25px rgba(255, 107, 0, 0.5); }
-            100% { box-shadow: 0 8px 20px rgba(255, 107, 0, 0.3); }
+            0% { box-shadow: 0 8px 22px rgba(255, 107, 0, 0.35); }
+            50% { box-shadow: 0 8px 28px rgba(255, 107, 0, 0.55); }
+            100% { box-shadow: 0 8px 22px rgba(255, 107, 0, 0.35); }
         }
 
         .btn-publish:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(255, 107, 0, 0.45);
+            box-shadow: 0 12px 30px rgba(255, 107, 0, 0.5);
         }
 
         .btn-publish:active {
             transform: translateY(0);
-            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
         }
 
+        /* Token Warning Alert Box */
         .token-alert {
             background: #ffebe9;
             color: #ff4d4f;
-            padding: 12px 16px;
-            border-radius: 16px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            padding: 14px 18px;
+            border-radius: 18px;
+            font-size: 0.86rem;
+            font-weight: 700;
             text-align: center;
-            margin-top: 15px;
+            margin-top: 18px;
             border: 1px solid #ffccc7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             animation: shakeAlert 0.5s ease-in-out;
         }
 
@@ -282,14 +313,14 @@
         }
 
         .dynamic-field {
-            margin-top: 8px;
+            margin-top: 10px;
             animation: expandField 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
             transform-origin: top;
         }
 
         @keyframes expandField {
-            from { opacity: 0; transform: scaleY(0.8) translateY(-10px); }
+            from { opacity: 0; transform: scaleY(0.8) translateY(-8px); }
             to { opacity: 1; transform: scaleY(1) translateY(0); }
         }
     </style>
@@ -297,7 +328,7 @@
 <body>
 
     <div class="card">
-        <!-- Header -->
+        <!-- Header Section -->
         <div class="header">
             <div class="brand">
                 <img src="https://i.postimg.co/g2T5B16V/logo.png" alt="LiNK Hub Logo" class="logo" onerror="this.src='https://via.placeholder.com/50'">
@@ -311,15 +342,16 @@
             </div>
         </div>
 
-        <!-- Form -->
+        <!-- Main Submission Form -->
         <form id="postForm" onsubmit="handlePublish(event)">
-            <!-- Post Title -->
+            
+            <!-- Post Title Field -->
             <div class="form-group">
                 <label><i class="fa-solid fa-font"></i> POST TITLE</label>
                 <input type="text" id="postTitle" placeholder="Enter post title..." required>
             </div>
 
-            <!-- Thumbnail Image -->
+            <!-- Thumbnail Image Field -->
             <div class="form-group">
                 <label><i class="fa-regular fa-image"></i> THUMBNAIL IMAGE</label>
                 <div class="file-input-wrapper">
@@ -328,7 +360,7 @@
                 </div>
             </div>
 
-            <!-- Additional Photos -->
+            <!-- Additional Photos Container -->
             <div class="form-group">
                 <div class="label-container">
                     <label><i class="fa-solid fa-images"></i> ADDITIONAL PHOTOS</label>
@@ -342,7 +374,7 @@
                 </div>
             </div>
 
-            <!-- Video Streams -->
+            <!-- Video Streams Container -->
             <div class="form-group">
                 <div class="label-container">
                     <label><i class="fa-solid fa-video"></i> VIDEO STREAMS</label>
@@ -356,21 +388,21 @@
                 </div>
             </div>
 
-            <!-- Submit Button -->
+            <!-- Publish Action Button -->
             <button type="submit" class="btn-publish" id="publishBtn">
                 Publish to Blogger <i class="fa-solid fa-paper-plane"></i>
             </button>
         </form>
 
-        <!-- Access Token Status -->
+        <!-- Access Token Status Check -->
         <div id="tokenStatus"></div>
     </div>
 
-    <!-- JavaScript Logic & API Handling -->
+    <!-- JavaScript & API Core Logic -->
     <script>
-        // =======================================================
-        // আপনার Blogger Access Token এবং Blog ID এখানে বসান
-        // =======================================================
+        // =========================================================================
+        // আপনার Blogger Access Token এবং Blog ID এখানে বসিয়ে দিন
+        // =========================================================================
         const BLOGGER_ACCESS_TOKEN = "আপনার_ACCESS_TOKEN_এখানে_দিন";
         const BLOG_ID = "আপনার_BLOG_ID_এখানে_দিন";
 
@@ -471,7 +503,8 @@
             publishButtonElement.innerHTML = `Publishing... <i class="fa-solid fa-spinner fa-spin"></i>`;
 
             try {
-                const apiResponse = await fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/`, {
+                const apiResponse = `https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/`;
+                const response = await fetch(apiResponse, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${BLOGGER_ACCESS_TOKEN}`,
@@ -483,18 +516,16 @@
                     })
                 });
 
-                const responseJsonData = await apiResponse.json();
+                const responseJsonData = await response.json();
 
                 if (responseJsonData.id) {
                     alert("অভিনন্দন! সফলভাবে আপনার ব্লগার সাইটে পোস্ট পাবলিশ হয়েছে! 🎉");
                     document.getElementById('postForm').reset();
                 } else {
                     alert("পোস্ট পাবলিশ করতে ব্যর্থ হয়েছে। দয়া করে আপনার Access Token এবং Blog ID চেক করুন।");
-                    console.error("Blogger API Error Details:", responseJsonData);
                 }
             } catch (networkError) {
-                alert("নেটওয়ার্ক সংযোগে সমস্যা হয়েছে! দয়া করে ইন্টারনেট কানেকশন চেক করুন।");
-                console.error("Network Exception:", networkError);
+                alert("নেটওয়ার্ক সংযোগে সমস্যা হয়েছে!");
             } finally {
                 publishButtonElement.disabled = false;
                 publishButtonElement.innerHTML = `Publish to Blogger <i class="fa-solid fa-paper-plane"></i>`;

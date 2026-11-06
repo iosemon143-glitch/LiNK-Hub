@@ -280,29 +280,6 @@
             box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
         }
 
-        .token-alert {
-            background: #ffebe9;
-            color: #ff4d4f;
-            padding: 14px 18px;
-            border-radius: 18px;
-            font-size: 0.86rem;
-            font-weight: 700;
-            text-align: center;
-            margin-top: 18px;
-            border: 1px solid #ffccc7;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            animation: shakeAlert 0.5s ease-in-out;
-        }
-
-        @keyframes shakeAlert {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-4px); }
-            40%, 80% { transform: translateX(4px); }
-        }
-
         .dynamic-field {
             margin-top: 10px;
             animation: expandField 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -384,33 +361,13 @@
                 Publish to Blogger <i class="fa-solid fa-paper-plane"></i>
             </button>
         </form>
-
-        <!-- Access Token Status Check -->
-        <div id="tokenStatus"></div>
     </div>
 
     <!-- JavaScript Core Logic -->
     <script>
-        // =========================================================================
-        // আপনার কনফিগারেশন টোকেন এবং ব্লগ আইডি এখানে সেট করা আছে
-        // =========================================================================
+        // আপনার টোকেন এবং ব্লগ আইডি এখানে স্থায়ীভাবে যুক্ত আছে
         const BLOGGER_ACCESS_TOKEN = "KIeHeeXhVhgCJax9xMyk485anVSVViT1";
         const BLOG_ID = "4933392428309988074";
-
-        window.addEventListener('DOMContentLoaded', function() {
-            verifyAccessToken();
-        });
-
-        function verifyAccessToken() {
-            const statusContainer = document.getElementById('tokenStatus');
-            if (!BLOGGER_ACCESS_TOKEN || BLOGGER_ACCESS_TOKEN.includes("YOUR_ACCESS_TOKEN") || BLOGGER_ACCESS_TOKEN.trim() === "") {
-                statusContainer.innerHTML = `<div class="token-alert"><i class="fa-solid fa-triangle-exclamation"></i> কোডের ভেতরে আপনার Access Token বসানো হয়নি!</div>`;
-                return false;
-            } else {
-                statusContainer.innerHTML = '';
-                return true;
-            }
-        }
 
         function triggerFileInput(targetElementId) {
             const hiddenFileInput = document.createElement('input');
@@ -456,11 +413,6 @@
 
         async function handlePublish(submissionEvent) {
             submissionEvent.preventDefault();
-
-            if (!verifyAccessToken()) {
-                alert("দয়া করে কোডের ভেতরে আপনার সঠিক Access Token বসিয়ে নিন!");
-                return;
-            }
 
             const postTitleText = document.getElementById('postTitle').value.trim();
             const thumbnailSource = document.getElementById('thumbnailUrl').value.trim();

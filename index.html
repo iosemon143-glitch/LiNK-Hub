@@ -1,611 +1,456 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiNK Hub - Viral Collection</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>LiNK Hub - Viral Collection Admin Panel (Full Edition)</title>
+    <!-- FontAwesome Icons for UI Elements -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        /* ==========================================================================
+           Global CSS Reset, Variables and Core Styling Layout
+           ========================================================================== */
         :root {
-            --bg-gradient: radial-gradient(circle at 50% -20%, #ffffff 0%, #f1f5f9 60%, #e2e8f0 100%);
-            --ios-glass-bg: rgba(255, 255, 255, 0.85);
-            --ios-glass-border: rgba(255, 255, 255, 0.95);
-            --ios-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.12), 
-                        0 0 0 1px rgba(255, 255, 255, 0.9) inset,
-                        inset 0 1px 2px rgba(255, 255, 255, 1);
-            --text-dark: #0f172a;
-            --text-sub: #64748b;
-            --orange-primary: #f97316;
-            --orange-gradient: linear-gradient(135deg, #ff8a3d 0%, #e05300 100%);
-            --orange-glow: rgba(249, 115, 22, 0.35);
-            --spring-physics: cubic-bezier(0.34, 1.75, 0.64, 1);
+            --primary-orange: #ff6b00;
+            --primary-gradient: linear-gradient(135deg, #ff6b00, #ff4500);
+            --bg-body: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #777777;
+            --border-color: #eef0f3;
+            --radius-card: 28px;
+            --radius-btn: 22px;
+            --radius-input: 20px;
         }
-        
+
         * {
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: var(--bg-gradient);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 20px 12px;
-            min-height: 100vh;
+            background-color: var(--bg-body);
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        .admin-card {
+        .card {
+            background: var(--card-bg);
             width: 100%;
-            max-width: 480px;
-            background: var(--ios-glass-bg);
-            backdrop-filter: blur(40px) saturate(200%);
-            -webkit-backdrop-filter: blur(40px) saturate(200%);
-            border: 1.5px solid var(--ios-glass-border);
-            border-radius: 40px;
-            padding: 26px 20px;
-            box-shadow: var(--ios-shadow);
-            animation: cardJumpingEntrance 0.8s var(--spring-physics) forwards;
+            max-width: 500px;
+            border-radius: var(--radius-card);
+            padding: 28px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
-        @keyframes cardJumpingEntrance {
-            0% { opacity: 0; transform: translateY(50px) scale(0.88); }
-            60% { transform: translateY(-8px) scale(1.02); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
+        /* Header Component */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 22px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            margin-bottom: 26px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .brand-info {
+        .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
-        .brand-icon {
-            width: 46px;
-            height: 46px;
-            background: #ffffff;
+        .logo {
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            box-shadow: 0 8px 18px rgba(249, 115, 22, 0.25);
-            border: 2px solid rgba(249, 115, 22, 0.3);
-            flex-shrink: 0;
-            transition: transform 0.4s var(--spring-physics);
-        }
-
-        .brand-icon:hover {
-            transform: scale(1.12) rotate(5deg);
-        }
-
-        .brand-icon img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
+            border: 2.5px solid #ffe8d6;
+            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.15);
         }
 
         .brand-text h2 {
-            margin: 0;
-            font-size: 20px;
+            font-size: 1.35rem;
+            color: var(--text-main);
             font-weight: 800;
-            color: var(--text-dark);
-            letter-spacing: -0.4px;
+            letter-spacing: -0.5px;
         }
 
         .brand-text p {
-            margin: 2px 0 0 0;
-            font-size: 11px;
-            color: var(--text-sub);
-            font-weight: 600;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
-        .badge {
-            background: rgba(249, 115, 22, 0.08);
-            color: var(--orange-primary);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 15px;
-            font-weight: 700;
-            border: 1px solid rgba(249, 115, 22, 0.18);
-            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8);
-            transition: transform 0.3s var(--spring-physics);
-        }
-
-        .badge:hover {
-            transform: scale(1.15) rotate(-8deg);
-        }
-
-        .input-group {
-            margin-bottom: 18px;
-        }
-
-        .input-group label {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 11px;
-            font-weight: 800;
-            color: var(--text-sub);
-            margin-bottom: 7px;
-            text-transform: uppercase;
-            letter-spacing: 0.7px;
-        }
-
-        .label-text {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .add-btn {
-            background: rgba(249, 115, 22, 0.1);
-            color: var(--orange-primary);
-            border: 1px solid rgba(249, 115, 22, 0.2);
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s var(--spring-physics);
-        }
-
-        .add-btn:hover {
-            background: var(--orange-primary);
-            color: white;
-            transform: translateY(-2px) scale(1.08);
-            box-shadow: 0 6px 16px var(--orange-glow);
-        }
-
-        .file-upload-box {
-            position: relative;
-            background: rgba(255, 255, 255, 0.95);
-            border: 1.5px solid #e2e8f0;
-            border-radius: 35px;
-            padding: 8px 10px 8px 16px;
-            cursor: pointer;
-            transition: all 0.4s var(--spring-physics);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03), inset 0 1px 2px rgba(255, 255, 255, 1);
-        }
-
-        .file-upload-box:hover {
-            border-color: var(--orange-primary);
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 10px 24px rgba(249, 115, 22, 0.18), inset 0 1px 3px rgba(255, 255, 255, 1);
-        }
-
-        .file-upload-box input[type="file"] {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            cursor: pointer;
-            z-index: 2;
-        }
-
-        .file-info {
-            font-size: 12px;
-            color: var(--text-sub);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-grow: 1;
-            min-width: 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .file-info span {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .file-info i {
-            color: var(--orange-primary);
-            font-size: 15px;
-            flex-shrink: 0;
-            transition: transform 0.3s var(--spring-physics);
-        }
-
-        .file-upload-box:hover .file-info i {
-            transform: scale(1.28) rotate(-10deg);
-        }
-
-        .upload-icon-btn {
-            background: var(--orange-gradient);
-            color: white;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 24px;
-            font-size: 11px;
-            font-weight: 800;
-            flex-shrink: 0;
-            z-index: 1;
-            box-shadow: 0 4px 12px var(--orange-glow);
-            transition: all 0.3s var(--spring-physics);
-        }
-
-        .text-input {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.95);
-            border: 1.5px solid #e2e8f0;
-            border-radius: 35px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-dark);
-            outline: none;
-            transition: all 0.35s var(--spring-physics);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03), inset 0 1px 2px rgba(255, 255, 255, 1);
-        }
-
-        .text-input:focus {
-            border-color: var(--orange-primary);
-            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.18), inset 0 1px 2px rgba(255, 255, 255, 1);
-            transform: translateY(-2px);
-        }
-
-        .dynamic-row {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 8px;
-            align-items: center;
-            animation: rowJumpingSlide 0.4s var(--spring-physics) forwards;
-        }
-
-        @keyframes rowJumpingSlide {
-            0% { opacity: 0; transform: translateY(-20px) scale(0.9); }
-            70% { transform: translateY(4px) scale(1.02); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .remove-btn {
-            background: rgba(255, 59, 48, 0.08);
-            color: #ff3b30;
-            border: 1px solid rgba(255, 59, 48, 0.15);
+        .target-icon {
+            width: 40px;
+            height: 40px;
+            background: #fff0f0;
             border-radius: 50%;
-            width: 42px;
-            height: 42px;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-            transition: all 0.3s var(--spring-physics);
+            color: #ff4747;
+            font-size: 1.1rem;
         }
 
-        .remove-btn:hover {
-            background: #ff3b30;
-            color: white;
-            transform: scale(1.15) rotate(90deg);
-            box-shadow: 0 6px 16px rgba(255, 59, 48, 0.35);
+        /* Form Controls and Layout Structure */
+        .form-group {
+            margin-bottom: 20px;
         }
 
-        .publish-btn {
+        .label-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #555555;
+            letter-spacing: 0.6px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        label i {
+            color: var(--primary-orange);
+            font-size: 0.9rem;
+        }
+
+        .file-input-wrapper {
+            display: flex;
+            gap: 10px;
             width: 100%;
-            background: var(--orange-gradient);
+            align-items: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: var(--radius-input);
+            border: 1.5px solid var(--border-color);
+            outline: none;
+            font-size: 0.96rem;
+            background: #fafbfc;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary-orange);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.1);
+        }
+
+        /* Interactive Buttons Style */
+        .btn-browse {
+            background: var(--primary-orange);
             color: white;
             border: none;
-            padding: 16px;
-            border-radius: 35px;
-            font-size: 16px;
-            font-weight: 800;
+            padding: 0 20px;
+            height: 48px;
+            border-radius: 18px;
+            font-weight: 600;
+            font-size: 0.88rem;
             cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.2);
+        }
+
+        .btn-browse:hover {
+            background: #e05e00;
+            transform: translateY(-1px);
+        }
+
+        .btn-add-light {
+            background: #fff3eb;
+            color: var(--primary-orange);
+            border: 1px solid #ffd8c2;
+            padding: 6px 14px;
+            border-radius: 14px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-add-light:hover {
+            background: #ffe5d0;
+        }
+
+        .btn-publish {
+            width: 100%;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 17px;
+            border-radius: var(--radius-btn);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(255, 107, 0, 0.35);
+            margin-top: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-top: 22px;
-            box-shadow: 0 10px 25px var(--orange-glow);
-            transition: all 0.4s var(--spring-physics);
+            transition: all 0.25s ease;
         }
 
-        .publish-btn:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 16px 35px rgba(249, 115, 22, 0.5);
+        .btn-publish:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 0, 0.45);
         }
 
-        .status-box {
-            margin-top: 16px;
-            padding: 14px;
-            border-radius: 24px;
-            font-size: 12px;
-            font-weight: 700;
+        /* Alert Status Containers */
+        .token-alert {
+            background: #ffebe9;
+            color: #ff4d4f;
+            padding: 14px 18px;
+            border-radius: 18px;
+            font-size: 0.88rem;
+            font-weight: 600;
             text-align: center;
-            display: none;
-            animation: statusPop 0.4s var(--spring-physics) forwards;
+            margin-top: 18px;
+            border: 1px solid #ffccc7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        @keyframes statusPop {
-            0% { opacity: 0; transform: scale(0.85); }
-            70% { transform: scale(1.05); }
-            100% { opacity: 1; transform: scale(1); }
+        .dynamic-field {
+            margin-top: 10px;
         }
-
-        .status-success { background: #e4fbf1; color: #34c759; border: 1.5px solid #b7f4d3; }
-        .status-error { background: #ffebeb; color: #ff3b30; border: 1.5px solid #ffccd0; }
-
-        .spin { animation: spin 1s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<div class="admin-card">
-    <div class="header">
-        <div class="brand-info">
-            <div class="brand-icon">
-                <img src="https://archive.org/download/20261031-043559/20261031_043559.png" alt="Logo">
-            </div>
-            <div class="brand-text">
-                <h2>LiNK Hub</h2>
-                <p>Viral Collection</p>
-            </div>
-        </div>
-        <span class="badge">🎯</span>
-    </div>
-
-    <div class="input-group">
-        <label>
-            <span class="label-text"><i class="fa-solid fa-heading" style="color:var(--orange-primary);"></i> Post Title</span>
-        </label>
-        <input type="text" id="postTitle" class="text-input" placeholder="Enter post title...">
-    </div>
-
-    <div class="input-group">
-        <label>
-            <span class="label-text"><i class="fa-solid fa-image" style="color:var(--orange-primary);"></i> Thumbnail Image</span>
-        </label>
-        <div class="file-upload-box">
-            <input type="file" id="thumbFile" accept="image/*" onchange="updateFileName(this, 'thumbText')">
-            <div class="file-info" id="thumbText">
-                <i class="fa-solid fa-cloud-arrow-up"></i> <span>Select thumbnail image...</span>
-            </div>
-            <span class="upload-icon-btn">Browse</span>
-        </div>
-    </div>
-
-    <div class="input-group">
-        <label>
-            <span class="label-text"><i class="fa-solid fa-images" style="color:var(--orange-primary);"></i> Additional Photos</span>
-            <button class="add-btn" onclick="addPhotoField()"><i class="fa-solid fa-plus"></i> Add Photo</button>
-        </label>
-        <div id="photoContainer">
-            <div class="dynamic-row">
-                <div class="file-upload-box" style="flex-grow:1;">
-                    <input type="file" class="photo-file" accept="image/*" onchange="updateFileName(this, this.nextElementSibling.firstElementChild.lastElementChild)">
-                    <div class="file-info">
-                        <i class="fa-solid fa-image"></i> <span>Select extra photo...</span>
-                    </div>
-                    <span class="upload-icon-btn">Browse</span>
+    <div class="card">
+        <!-- Main Panel Header Component -->
+        <div class="header">
+            <div class="brand">
+                <img src="https://i.postimg.co/g2T5B16V/logo.png" alt="LiNK Hub Logo" class="logo" onerror="this.src='https://via.placeholder.com/50'">
+                <div class="brand-text">
+                    <h2>LiNK Hub</h2>
+                    <p>Viral Collection</p>
                 </div>
             </div>
+            <div class="target-icon">
+                <i class="fa-solid fa-bullseye"></i>
+            </div>
         </div>
-    </div>
 
-    <div class="input-group">
-        <label>
-            <span class="label-text"><i class="fa-solid fa-video" style="color:var(--orange-primary);"></i> Video Streams</span>
-            <button class="add-btn" onclick="addVideoField()"><i class="fa-solid fa-plus"></i> Add Video</button>
-        </label>
-        <div id="videoContainer">
-            <div class="dynamic-row">
-                <div class="file-upload-box" style="flex-grow:1;">
-                    <input type="file" class="video-file" accept="video/*" onchange="updateFileName(this, this.nextElementSibling.firstElementChild.lastElementChild)">
-                    <div class="file-info">
-                        <i class="fa-solid fa-video"></i> <span>Select video stream...</span>
-                    </div>
-                    <span class="upload-icon-btn">Browse</span>
+        <!-- Master Submission Entry Form -->
+        <form id="postForm" onsubmit="handlePublish(event)">
+            
+            <!-- Post Title Input Field -->
+            <div class="form-group">
+                <label><i class="fa-solid fa-font"></i> POST TITLE</label>
+                <input type="text" id="postTitle" placeholder="Enter post title here..." required>
+            </div>
+
+            <!-- Main Thumbnail Image Input Field -->
+            <div class="form-group">
+                <label><i class="fa-regular fa-image"></i> THUMBNAIL IMAGE</label>
+                <div class="file-input-wrapper">
+                    <input type="text" id="thumbnailUrl" placeholder="Select thumbnail image or enter link...">
+                    <button type="button" class="btn-browse" onclick="triggerFileInput('thumbnailUrl')">Browse</button>
                 </div>
             </div>
-        </div>
+
+            <!-- Additional Dynamic Photos Container Block -->
+            <div class="form-group">
+                <div class="label-container">
+                    <label><i class="fa-solid fa-images"></i> ADDITIONAL PHOTOS</label>
+                    <button type="button" class="btn-add-light" onclick="addNewField('additionalPhotosContainer', 'photo')">+ Add Photo</button>
+                </div>
+                <div id="additionalPhotosContainer">
+                    <div class="file-input-wrapper dynamic-field">
+                        <input type="text" class="additional-photo-input" placeholder="Select extra photo...">
+                        <button type="button" class="btn-browse" onclick="triggerDynamicFileInput(this)">Browse</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Streams Dynamic Container Block -->
+            <div class="form-group">
+                <div class="label-container">
+                    <label><i class="fa-solid fa-video"></i> VIDEO STREAMS</label>
+                    <button type="button" class="btn-add-light" onclick="addNewField('videoStreamsContainer', 'video')">+ Add Video</button>
+                </div>
+                <div id="videoStreamsContainer">
+                    <div class="file-input-wrapper dynamic-field">
+                        <input type="text" class="video-stream-input" placeholder="Select video stream or link...">
+                        <button type="button" class="btn-browse" onclick="triggerDynamicFileInput(this)">Browse</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Publication Button -->
+            <button type="submit" class="btn-publish" id="publishBtn">
+                Publish to Blogger <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </form>
+
+        <!-- Configuration Access Token Warning Verification Area -->
+        <div id="tokenStatus"></div>
     </div>
 
-    <button class="publish-btn" onclick="publishPost()" id="submitBtn">
-        <span id="btnText">Publish to Blogger</span>
-        <i class="fa-solid fa-paper-plane" id="btnIcon"></i>
-    </button>
+    <!-- ==========================================================================
+       JavaScript System Execution & API Management Core Layer
+       ========================================================================== -->
+    <script>
+        // আপনার কনফিগারেশন টোকেন ও ব্লগ আইডি এখানে বসাবেন:
+        const BLOGGER_ACCESS_TOKEN = "আপনার_ACCESS_TOKEN_এখানে_দিন";
+        const BLOG_ID = "আপনার_BLOG_ID_এখানে_দিন";
 
-    <div class="status-box" id="statusBox"></div>
-</div>
-
-<script>
-const FIXED_BLOG_ID = "4933392428309988074"; 
-const S3_ACCESS_KEY = "KIeHeeXhVhgCJax9";
-const S3_SECRET_KEY = "xMyk485anVSVViT1";
-const FIXED_TOKEN = "YOUR_ACCESS_TOKEN"; 
-const FIXED_AD_LINK = "YOUR_ADSTERRA_SMARTLINK"; 
-
-function updateFileName(input, target) {
-    if (input.files && input.files[0]) {
-        let fileName = input.files[0].name;
-        let successHTML = `<i class="fa-solid fa-circle-check" style="color:#34c759;"></i> <span>${fileName}</span>`;
-        if(typeof target === 'string') {
-            document.getElementById(target).innerHTML = successHTML;
-        } else {
-            target.innerHTML = successHTML;
-        }
-    }
-}
-
-function addPhotoField() {
-    let container = document.getElementById('photoContainer');
-    let div = document.createElement('div');
-    div.className = 'dynamic-row';
-    div.innerHTML = `
-        <div class="file-upload-box" style="flex-grow:1;">
-            <input type="file" class="photo-file" accept="image/*" onchange="updateFileName(this, this.nextElementSibling.firstElementChild.lastElementChild)">
-            <div class="file-info">
-                <i class="fa-solid fa-image"></i> <span>Select extra photo...</span>
-            </div>
-            <span class="upload-icon-btn">Browse</span>
-        </div>
-        <button class="remove-btn" onclick="removeRow(this)"><i class="fa-solid fa-xmark"></i></button>
-    `;
-    container.appendChild(div);
-}
-
-function addVideoField() {
-    let container = document.getElementById('videoContainer');
-    let div = document.createElement('div');
-    div.className = 'dynamic-row';
-    div.innerHTML = `
-        <div class="file-upload-box" style="flex-grow:1;">
-            <input type="file" class="video-file" accept="video/*" onchange="updateFileName(this, this.nextElementSibling.firstElementChild.lastElementChild)">
-            <div class="file-info">
-                <i class="fa-solid fa-video"></i> <span>Select video stream...</span>
-            </div>
-            <span class="upload-icon-btn">Browse</span>
-        </div>
-        <button class="remove-btn" onclick="removeRow(this)"><i class="fa-solid fa-xmark"></i></button>
-    `;
-    container.appendChild(div);
-}
-
-function removeRow(btn) {
-    let row = btn.parentElement;
-    row.style.animation = "rowJumpingSlide 0.3s var(--spring-physics) reverse forwards";
-    setTimeout(() => row.remove(), 250);
-}
-
-async function uploadFileToHosting(file) {
-    let formData = new FormData();
-    formData.append("reqtype", "fileupload");
-    formData.append("fileToUpload", file);
-    formData.append("access_key", S3_ACCESS_KEY);
-
-    let response = await fetch("https://catbox.moe/user/api.php", {
-        method: "POST",
-        body: formData
-    });
-    let resultUrl = await response.text();
-    return resultUrl.trim();
-}
-
-async function publishPost() {
-    let title = document.getElementById('postTitle').value.trim();
-    if(!title) {
-        showStatus("দয়া করে Post Title লিখুন!", false);
-        return;
-    }
-
-    if(FIXED_TOKEN === "YOUR_ACCESS_TOKEN") {
-        showStatus("কোডের ভেতরে আপনার Access Token বসানো হয়নি!", false);
-        return;
-    }
-
-    setLoading(true);
-    showStatus("ফাইল আপলোড ও ব্লগারে পোস্ট হচ্ছে...", true);
-
-    try {
-        let thumbFile = document.getElementById('thumbFile').files[0];
-        let thumbUrl = "";
-        if(thumbFile) thumbUrl = await uploadFileToHosting(thumbFile);
-
-        let photoInputs = document.querySelectorAll('.photo-file');
-        let photoUrls = [];
-        for(let input of photoInputs) {
-            if(input.files[0]) {
-                let url = await uploadFileToHosting(input.files[0]);
-                photoUrls.push(url);
-            }
-        }
-
-        let videoInputs = document.querySelectorAll('.video-file');
-        let videoUrls = [];
-        for(let input of videoInputs) {
-            if(input.files[0]) {
-                let url = await uploadFileToHosting(input.files[0]);
-                videoUrls.push(url);
-            }
-        }
-
-        let thumbHTML = thumbUrl ? `<img src="${thumbUrl}" style="width:100%; max-height:400px; object-fit:cover; border-radius:20px; margin-bottom:15px;" />` : '';
-        let photosHTML = photoUrls.map(url => `<img src="${url}" style="width:100%; max-height:400px; object-fit:cover; border-radius:20px; margin-bottom:15px;" />`).join('');
-        let videosHTML = videoUrls.map(url => `<video controls controlsList="nodownload" style="width:100%; border-radius:18px; background:#000; margin-bottom:15px;"><source src="${url}" type="video/mp4"></video>`).join('');
-
-        let htmlContent = `
-<div class="ink-post-container" style="text-align:center; max-width:650px; margin:0 auto; font-family:sans-serif;">
-    <h3 style="color:#333; margin-bottom:15px;">${title}</h3>
-    ${thumbHTML}
-    ${photosHTML}
-    ${videosHTML}
-    <br/>
-    ${FIXED_AD_LINK !== "YOUR_ADSTERRA_SMARTLINK" ? `<a href="${FIXED_AD_LINK}" target="_blank" style="background:#f97316; color:#fff; padding:14px 30px; border-radius:30px; text-decoration:none; font-weight:bold; display:inline-block; font-size:16px; box-shadow:0 4px 14px rgba(249,115,22,0.3);">Watch / Download Link</a>` : ''}
-</div>`;
-
-        let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/${FIXED_BLOG_ID}/posts/`, {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + FIXED_TOKEN,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ "title": title, "content": htmlContent })
+        // পেজ সম্পূর্ণ লোড হওয়ার পর টোকেন কনফিগারেশন যাচাই করা
+        window.addEventListener('DOMContentLoaded', function() {
+            verifyAccessToken();
         });
 
-        if (!response.ok) throw new Error('Blogger API Failed');
+        // এক্সেস টোকেন ভ্যালিডেশন লজিক ফাংশন
+        function verifyAccessToken() {
+            const statusContainer = document.getElementById('tokenStatus');
+            if (!BLOGGER_ACCESS_TOKEN || BLOGGER_ACCESS_TOKEN.includes("আপনার_") || BLOGGER_ACCESS_TOKEN.trim() === "") {
+                statusContainer.innerHTML = `<div class="token-alert"><i class="fa-solid fa-triangle-exclamation"></i> কোডের ভেতরে আপনার Access Token বসানো হয়নি!</div>`;
+                return false;
+            } else {
+                statusContainer.innerHTML = '';
+                return true;
+            }
+        }
 
-        showStatus("🎉 পোস্ট সফলভাবে আপনার ব্লগারে লাইভ হয়েছে!", true);
-        document.getElementById('postTitle').value = '';
-        document.getElementById('thumbFile').value = '';
-        document.getElementById('thumbText').innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>Select thumbnail image...</span>`;
-        
-    } catch(error) {
-        showStatus("পোস্ট করতে ব্যর্থ হয়েছে! সঠিক Access Token বা নেটওয়ার্ক চেক করুন।", false);
-    } finally {
-        setLoading(false);
-    }
-}
+        // থাম্বনেইল ফাইল সিলেক্ট করার হার্ডওয়্যার ফাইল রিডার হ্যান্ডলার
+        function triggerFileInput(targetElementId) {
+            const hiddenFileInput = document.createElement('input');
+            hiddenFileInput.type = 'file';
+            hiddenFileInput.accept = 'image/*,video/*';
+            hiddenFileInput.onchange = function(e) {
+                const selectedFile = e.target.files[0];
+                if (selectedFile) {
+                    document.getElementById(targetElementId).value = selectedFile.name;
+                }
+            };
+            hiddenFileInput.click();
+        }
 
-function setLoading(isLoading) {
-    let btnText = document.getElementById('btnText');
-    let btnIcon = document.getElementById('btnIcon');
-    let btn = document.getElementById('submitBtn');
-    
-    if(isLoading) {
-        btnText.innerText = "Publishing...";
-        btnIcon.className = "fa-solid fa-spinner spin";
-        btn.style.opacity = "0.85";
-        btn.style.pointerEvents = "none";
-    } else {
-        btnText.innerText = "Publish to Blogger";
-        btnIcon.className = "fa-solid fa-paper-plane";
-        btn.style.opacity = "1";
-        btn.style.pointerEvents = "auto";
-    }
-}
+        // ডায়নামিক ফাইল ফিল্ডের জন্য ফাইল ব্রাউজ ইভেন্ট হ্যান্ডলার
+        function triggerDynamicFileInput(buttonElement) {
+            const textInputField = buttonElement.previousElementSibling;
+            const hiddenFileInput = document.createElement('input');
+            hiddenFileInput.type = 'file';
+            hiddenFileInput.accept = 'image/*,video/*';
+            hiddenFileInput.onchange = function(e) {
+                const selectedFile = e.target.files[0];
+                if (selectedFile) {
+                    textInputField.value = selectedFile.name;
+                }
+            };
+            hiddenFileInput.click();
+        }
 
-function showStatus(msg, isSuccess) {
-    let statusBox = document.getElementById('statusBox');
-    statusBox.innerText = msg;
-    statusBox.style.display = 'block';
-    statusBox.className = 'status-box ' + (isSuccess ? 'status-success' : 'status-error');
-}
-</script>
+        // নতুন ফিল্ড বা রো ডাইনামিকালি যুক্ত করার ফাংশন
+        function addNewField(containerWrapperId, fieldCategory) {
+            const containerBox = document.getElementById(containerWrapperId);
+            const wrapperDiv = document.createElement('div');
+            wrapperDiv.className = 'file-input-wrapper dynamic-field';
+            
+            const inputPlaceholderText = fieldCategory === 'photo' ? 'Select extra photo...' : 'Select video stream...';
+            const specificInputClassName = fieldCategory === 'photo' ? 'additional-photo-input' : 'video-stream-input';
 
+            wrapperDiv.innerHTML = `
+                <input type="text" class="${specificInputClassName}" placeholder="${inputPlaceholderText}">
+                <button type="button" class="btn-browse" onclick="triggerDynamicFileInput(this)">Browse</button>
+            `;
+            containerBox.appendChild(wrapperDiv);
+        }
+
+        // ব্লগার এপিআই এর মাধ্যমে রিমোট পোস্ট পাবলিশিং রিকোয়েস্ট হ্যান্ডলার
+        async function handlePublish(submissionEvent) {
+            submissionEvent.preventDefault();
+
+            if (!verifyAccessToken()) {
+                alert("দয়া করে কোডের ভেতরে আপনার সঠিক Access Token বসিয়ে নিন!");
+                return;
+            }
+
+            const postTitleText = document.getElementById('postTitle').value.trim();
+            const thumbnailSource = document.getElementById('thumbnailUrl').value.trim();
+
+            // সকল অতিরিক্ত ছবির ডাটা ফিল্টার করে সংগ্রহ করা
+            const extraPhotoInputsList = document.querySelectorAll('.additional-photo-input');
+            let collectedPhotosHtmlCode = '';
+            extraPhotoInputsList.forEach(function(field) {
+                if (field.value.trim() !== '') {
+                    collectedPhotosHtmlCode += `<p><img src="${field.value}" alt="Extra Image" style="max-width:100%; border-radius:12px; margin-bottom:10px;"/></p>`;
+                }
+            });
+
+            // সকল ভিডিও স্ট্রিমের ডাটা ফিল্টার করে সংগ্রহ করা
+            const extraVideoInputsList = document.querySelectorAll('.video-stream-input');
+            let collectedVideosHtmlCode = '';
+            extraVideoInputsList.forEach(function(field) {
+                if (field.value.trim() !== '') {
+                    collectedVideosHtmlCode += `<p><strong>Video Stream:</strong> ${field.value}</p>`;
+                }
+            });
+
+            // সম্পূর্ণ পোস্টের ফরম্যাট করা কন্টেন্ট বডি এইচটিএমএল
+            const finalPostContentHtml = `
+                <div class="viral-post-body">
+                    ${thumbnailSource ? `<p><img src="${thumbnailSource}" alt="Thumbnail" style="max-width:100%; border-radius:12px; margin-bottom:15px;"/></p>` : ''}
+                    ${collectedPhotosHtmlCode}
+                    ${collectedVideosHtmlCode}
+                </div>
+            `;
+
+            const publishButtonElement = document.getElementById('publishBtn');
+            publishButtonElement.disabled = true;
+            publishButtonElement.innerHTML = `Publishing... <i class="fa-solid fa-spinner fa-spin"></i>`;
+
+            try {
+                const apiResponse = await fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${BLOGGER_ACCESS_TOKEN}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: postTitleText,
+                        content: finalPostContentHtml
+                    })
+                });
+
+                const responseJsonData = await apiResponse.json();
+
+                if (responseJsonData.id) {
+                    alert("অভিনন্দন! সফলভাবে আপনার ব্লগার সাইটে পোস্ট পাবলিশ হয়েছে! 🎉");
+                    document.getElementById('postForm').reset();
+                } else {
+                    alert("পোস্ট পাবলিশ করতে ব্যর্থ হয়েছে। দয়া করে আপনার Access Token এবং Blog ID চেক করুন।");
+                    console.error("Blogger API Error Details:", responseJsonData);
+                }
+            } catch (networkError) {
+                alert("নেটওয়ার্ক সংযোগে সমস্যা হয়েছে! দয়া করে ইন্টারনেট কানেকশন চেক করুন।");
+                console.error("Network Exception:", networkError);
+            } finally {
+                publishButtonElement.disabled = false;
+                publishButtonElement.innerHTML = `Publish to Blogger <i class="fa-solid fa-paper-plane"></i>`;
+            }
+        }
+    </script>
 </body>
 </html>

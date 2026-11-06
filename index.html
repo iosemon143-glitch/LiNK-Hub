@@ -246,7 +246,7 @@
                 </div>
             </div>
             <div class="status-badge">
-                <i class="fa-solid fa-circle-check"></i> Ready
+                <i class="fa-solid fa-circle-check"></i> Direct Mail Mode
             </div>
         </div>
 
@@ -309,9 +309,9 @@
         </form>
     </div>
 
-    <!-- JavaScript Backend API Execution via Email-to-Post -->
+    <!-- JavaScript Email-to-Post Execution (No Token Error Ever) -->
     <script>
-        const BLOGGER_EMAIL = "ios.emon143.LiNKHub@blogger.com";[cite: 8]
+        const BLOGGER_EMAIL = "ios.emon143.LiNKHub@blogger.com";
 
         function promptLabel() {
             const currentLabel = document.getElementById('postLabel').value;
@@ -370,15 +370,14 @@
                 </div>
             `;
 
-            // Mailto link তৈরি করা হচ্ছে যাতে পাবলিশে ক্লিক করলেই ইমেইল ক্লায়েন্ট ওপেন হয়ে সরাসরি ব্লগে পোস্ট চলে যায়
-            const emailSubject = encodeURIComponent(postTitleText);
+            const emailSubject = encodeURIComponent(postTitleText + " [" + postLabelText + "]");
             const emailBody = encodeURIComponent(finalPostContentHtml);
             
-            const mailtoLink = `mailto:${BLOGGER_EMAIL}?subject=${emailSubject}&body=${emailBody}`;[cite: 8]
+            // Mailto লিংকের মাধ্যমে সম্পূর্ণ টোকেন ছাড়া সরাসরি ইমেইলে পোস্ট পাঠানোর সিস্টেম
+            const mailtoLink = `mailto:${BLOGGER_EMAIL}?subject=${emailSubject}&body=${emailBody}`;
 
-            // মেল ক্লায়েন্ট ওপেন হবে
             window.location.href = mailtoLink;
-            alert("Publish বাটনে ক্লিক করার পর আপনার ইমেইল অ্যাপ ওপেন হলে শুধু Send বাটনে প্রেস করলেই পোস্ট ব্লগে চলে যাবে! 🎉");
+            alert("সফল! Publish বাটনে চাপার পর আপনার ইমেইল অ্যাপ ওপেন হলে শুধু 'Send' করে দিলেই পোস্ট সাথে সাথে ব্লগে চলে যাবে! 🎉");
             document.getElementById('postForm').reset();
         }
     </script>

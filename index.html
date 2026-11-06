@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LiNK Hub - Viral Collection</title>
-    <!-- FontAwesome Icons for UI -->
+    <!-- FontAwesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -34,6 +34,12 @@
             align-items: center;
             min-height: 100vh;
             padding: 16px;
+            animation: fadeInBody 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInBody {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .card {
@@ -44,6 +50,12 @@
             padding: 26px 22px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
             position: relative;
+            animation: slideUpCard 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes slideUpCard {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .header {
@@ -72,6 +84,11 @@
             font-size: 1.4rem;
             box-shadow: 0 4px 12px rgba(255, 102, 0, 0.12);
             overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-box:hover {
+            transform: scale(1.08) rotate(6deg);
         }
 
         .logo-box img {
@@ -95,9 +112,10 @@
             margin-top: 2px;
         }
 
+        /* Interactive Target Token Button */
         .target-icon {
-            width: 38px;
-            height: 38px;
+            width: 42px;
+            height: 42px;
             background: #ffebeb;
             border-radius: 50%;
             display: flex;
@@ -105,6 +123,15 @@
             justify-content: center;
             color: #ff3b3b;
             font-size: 1.1rem;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 12px rgba(255, 59, 59, 0.2);
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .target-icon:hover {
+            transform: scale(1.15) rotate(15deg);
+            background: #ffd6d6;
         }
 
         .form-group {
@@ -142,6 +169,7 @@
 
         .input-pill-wrapper:focus-within {
             border-color: var(--primary-orange);
+            box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.1);
         }
 
         .input-icon-inside {
@@ -151,7 +179,7 @@
             margin-right: 4px;
         }
 
-        input[type="text"] {
+        input[type="text"], input[type="password"] {
             width: 100%;
             padding: 12px 14px;
             border: none;
@@ -162,7 +190,7 @@
             font-weight: 500;
         }
 
-        input[type="text"]::placeholder {
+        input::placeholder {
             color: #94a3b8;
             font-weight: 400;
         }
@@ -179,6 +207,11 @@
             cursor: pointer;
             white-space: nowrap;
             box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
+            transition: transform 0.15s;
+        }
+
+        .btn-browse:active {
+            transform: scale(0.97);
         }
 
         .btn-add-light {
@@ -208,16 +241,108 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            transition: all 0.2s ease;
+            animation: pulseGlow 3s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 8px 24px rgba(255, 102, 0, 0.35); }
+            50% { box-shadow: 0 8px 30px rgba(255, 102, 0, 0.55); }
+            100% { box-shadow: 0 8px 24px rgba(255, 102, 0, 0.35); }
+        }
+
+        .btn-publish:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(255, 102, 0, 0.5);
         }
 
         .dynamic-field {
             margin-top: 10px;
+        }
+
+        /* Modal Popup for Access Token Setup */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: white;
+            width: 90%;
+            max-width: 380px;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-box h3 {
+            font-size: 1.1rem;
+            color: #0f172a;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .modal-box p {
+            font-size: 0.82rem;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .modal-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .btn-modal-save {
+            flex: 1;
+            background: var(--orange-gradient);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-modal-cancel {
+            background: #f1f5f9;
+            color: #64748b;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
     <div class="card">
+        <!-- Header -->
         <div class="header">
             <div class="brand">
                 <div class="logo-box">
@@ -229,12 +354,16 @@
                     <p>Viral Collection</p>
                 </div>
             </div>
-            <div class="target-icon">
+            <!-- Target Icon Button to Configure Token -->
+            <button class="target-icon" onclick="openTokenModal()" title="Configure Access Token">
                 <i class="fa-solid fa-bullseye"></i>
-            </div>
+            </button>
         </div>
 
+        <!-- Form -->
         <form id="postForm" onsubmit="handlePublish(event)">
+            
+            <!-- Post Title -->
             <div class="form-group">
                 <label><i class="fa-solid fa-h"></i> POST TITLE</label>
                 <div class="input-pill-wrapper">
@@ -242,6 +371,7 @@
                 </div>
             </div>
 
+            <!-- Thumbnail Image -->
             <div class="form-group">
                 <label><i class="fa-regular fa-image"></i> THUMBNAIL IMAGE</label>
                 <div class="input-pill-wrapper">
@@ -251,6 +381,7 @@
                 </div>
             </div>
 
+            <!-- Additional Photos -->
             <div class="form-group">
                 <div class="label-container">
                     <label><i class="fa-regular fa-images"></i> ADDITIONAL PHOTOS</label>
@@ -265,6 +396,7 @@
                 </div>
             </div>
 
+            <!-- Video Streams -->
             <div class="form-group">
                 <div class="label-container">
                     <label><i class="fa-solid fa-video"></i> VIDEO STREAMS</label>
@@ -279,17 +411,52 @@
                 </div>
             </div>
 
+            <!-- Publish Button -->
             <button type="submit" class="btn-publish" id="publishBtn">
                 Publish to Blogger <i class="fa-solid fa-paper-plane"></i>
             </button>
         </form>
     </div>
 
+    <!-- Token Settings Modal -->
+    <div class="modal-overlay" id="tokenModal">
+        <div class="modal-box">
+            <h3>Blogger Access Token</h3>
+            <p>আপনার OAuth Access Token এখানে পেস্ট করে সেভ করুন। এটি আপনার ব্রাউজারে সুরক্ষিত থাকবে।</p>
+            <div class="input-pill-wrapper">
+                <input type="password" id="tokenInput" placeholder="Paste access token here...">
+            </div>
+            <div class="modal-btns">
+                <button type="button" class="btn-modal-cancel" onclick="closeTokenModal()">Cancel</button>
+                <button type="button" class="btn-modal-save" onclick="saveToken()">Save Token</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Backend API Execution -->
     <script>
-        // আপনার ইন্টারনেট আর্কাইভ এস-থ্রি কি কনফিগারেশন এখানে যুক্ত করা হলো
-        const S3_ACCESS_KEY = "xNyk485anVSVViT1";[cite: 5]
-        const S3_SECRET_KEY = "KIeHeeXhVhgCJax9";[cite: 5]
         const BLOG_ID = "4933392428309988074";
+
+        function openTokenModal() {
+            const savedToken = localStorage.getItem('blogger_access_token') || '';
+            document.getElementById('tokenInput').value = savedToken;
+            document.getElementById('tokenModal').classList.add('active');
+        }
+
+        function closeTokenModal() {
+            document.getElementById('tokenModal').classList.remove('active');
+        }
+
+        function saveToken() {
+            const tokenValue = document.getElementById('tokenInput').value.trim();
+            if(tokenValue) {
+                localStorage.setItem('blogger_access_token', tokenValue);
+                alert("Access Token সফলভাবে সেভ হয়েছে! 🎉");
+                closeTokenModal();
+            } else {
+                alert("দয়া করে একটি ভ্যালিড টোকেন দিন।");
+            }
+        }
 
         function triggerFileInput(targetElementId) {
             const hiddenFileInput = document.createElement('input');
@@ -338,6 +505,13 @@
         async function handlePublish(submissionEvent) {
             submissionEvent.preventDefault();
 
+            const ACCESS_TOKEN = localStorage.getItem('blogger_access_token');
+            if(!ACCESS_TOKEN) {
+                alert("দয়া করে ওপরের ডানপাশের 🎯 (Target) আইকনে ক্লিক করে আপনার Blogger Access Token সেট করে নিন!");
+                openTokenModal();
+                return;
+            }
+
             const postTitleText = document.getElementById('postTitle').value.trim();
             const thumbnailSource = document.getElementById('thumbnailUrl').value.trim();
 
@@ -367,15 +541,29 @@
 
             const publishButtonElement = document.getElementById('publishBtn');
             publishButtonElement.disabled = true;
-            publishButtonElement.innerHTML = `Uploading via S3 & Publishing... <i class="fa-solid fa-spinner fa-spin"></i>`;
+            publishButtonElement.innerHTML = `Publishing... <i class="fa-solid fa-spinner fa-spin"></i>`;
 
             try {
-                // ইন্টারনেট আর্কাইভ এস-থ্রি স্টোরেজে ফাইল আপলোড প্রিপারেশন এবং ব্লগার এপিআই রিকোয়েস্ট হ্যান্ডলিং
-                console.log("S3 Access Key:", S3_ACCESS_KEY);[cite: 5]
-                console.log("S3 Secret Key:", S3_SECRET_KEY);[cite: 5]
+                const response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${ACCESS_TOKEN}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: postTitleText,
+                        content: finalPostContentHtml
+                    })
+                });
 
-                // যেহেতু ব্লগার এপিআইয়ের জন্য সঠিক OAUTH টোকেন প্রয়োজন, আপনি চাইলে আপনার আসল Blogger Access Token এখানে পরবর্তীতে বসাতে পারেন।
-                alert("সঠিক Blogger Access Token বা OAuth টোকেন ব্যবহার না করলে Blogger API কাজ করবে না। দয়া করে Google OAuth Playground থেকে আসল Blogger Token সংগ্রহ করুন।");
+                const responseJsonData = await response.json();
+
+                if (responseJsonData.id) {
+                    alert("অভিনন্দন! সফলভাবে আপনার ব্লগার সাইটে পোস্ট পাবলিশ হয়েছে! 🎉");
+                    document.getElementById('postForm').reset();
+                } else {
+                    alert("পোস্ট পাবলিশ করতে সমস্যা হয়েছে: " + (responseJsonData.error?.message || "টোকেনটি মেয়াদোত্তীর্ণ হতে পারে।"));
+                }
             } catch (networkError) {
                 alert("নেটওয়ার্ক সংযোগে সমস্যা হয়েছে!");
             } finally {

@@ -371,8 +371,7 @@
                         <i class="fa-solid fa-tags"></i> Label
                     </button>
                 </div>
-                <!-- Hidden input to store label value -->
-                <input type="hidden" id="postLabel" value="Viral">
+                <input type="hidden" id="postLabel" value="Trending Link">
             </div>
 
             <!-- Post Image -->
@@ -380,7 +379,7 @@
                 <label><i class="fa-regular fa-image"></i> Post Image</label>
                 <div class="input-pill-wrapper">
                     <i class="fa-solid fa-cloud-arrow-up input-icon-inside"></i>
-                    <input type="text" id="thumbnailUrl" placeholder="Select post image...">
+                    <input type="text" id="thumbnailUrl" placeholder="Select post image link or file...">
                     <button type="button" class="btn-browse" onclick="triggerFileInput('thumbnailUrl')">Browse</button>
                 </div>
             </div>
@@ -394,7 +393,7 @@
                 <div id="additionalPhotosContainer">
                     <div class="input-pill-wrapper dynamic-field">
                         <i class="fa-regular fa-image input-icon-inside"></i>
-                        <input type="text" class="additional-photo-input" placeholder="Select extra photo...">
+                        <input type="text" class="additional-photo-input" placeholder="Select extra photo link...">
                         <button type="button" class="btn-browse" onclick="triggerDynamicFileInput(this)">Browse</button>
                     </div>
                 </div>
@@ -409,7 +408,7 @@
                 <div id="videoStreamsContainer">
                     <div class="input-pill-wrapper dynamic-field">
                         <i class="fa-solid fa-video input-icon-inside"></i>
-                        <input type="text" class="video-stream-input" placeholder="Select video stream...">
+                        <input type="text" class="video-stream-input" placeholder="Select video stream link...">
                         <button type="button" class="btn-browse" onclick="triggerDynamicFileInput(this)">Browse</button>
                     </div>
                 </div>
@@ -468,7 +467,7 @@
 
         function promptLabel() {
             const currentLabel = document.getElementById('postLabel').value;
-            const newLabel = prompt("পোস্টের জন্য লেবেল বা ক্যাটাগরি লিখুন (কমা দিয়ে একাধিক দিতে পারেন):", currentLabel);
+            const newLabel = prompt("পোস্টের জন্য লেবেল বা ক্যাটাগরি লিখুন:", currentLabel);
             if(newLabel !== null) {
                 document.getElementById('postLabel').value = newLabel.trim();
                 alert("লেবেল সেট করা হয়েছে: " + newLabel);
@@ -476,30 +475,19 @@
         }
 
         function triggerFileInput(targetElementId) {
-            const hiddenFileInput = document.createElement('input');
-            hiddenFileInput.type = 'file';
-            hiddenFileInput.accept = 'image/*,video/*';
-            hiddenFileInput.onchange = function(e) {
-                const selectedFile = e.target.files[0];
-                if (selectedFile) {
-                    document.getElementById(targetElementId).value = selectedFile.name;
-                }
-            };
-            hiddenFileInput.click();
+            const inputField = document.getElementById(targetElementId);
+            const userUrl = prompt("ছবির সরাসরি লিংক (URL) দিন অথবা ফাইল সিলেক্ট করুন:", inputField.value);
+            if(userUrl !== null) {
+                inputField.value = userUrl.trim();
+            }
         }
 
         function triggerDynamicFileInput(buttonElement) {
             const textInputField = buttonElement.previousElementSibling;
-            const hiddenFileInput = document.createElement('input');
-            hiddenFileInput.type = 'file';
-            hiddenFileInput.accept = 'image/*,video/*';
-            hiddenFileInput.onchange = function(e) {
-                const selectedFile = e.target.files[0];
-                if (selectedFile) {
-                    textInputField.value = selectedFile.name;
-                }
-            };
-            hiddenFileInput.click();
+            const userUrl = prompt("এক্সট্রা ছবি বা ভিডিওর সরাসরি লিংক (URL) দিন:", textInputField.value);
+            if(userUrl !== null) {
+                textInputField.value = userUrl.trim();
+            }
         }
 
         function addNewField(containerWrapperId, fieldCategory) {
@@ -508,7 +496,7 @@
             wrapperDiv.className = 'input-pill-wrapper dynamic-field';
             
             const iconClass = fieldCategory === 'photo' ? 'fa-regular fa-image' : 'fa-solid fa-video';
-            const inputPlaceholderText = fieldCategory === 'photo' ? 'Select extra photo...' : 'Select video stream...';
+            const inputPlaceholderText = fieldCategory === 'photo' ? 'Select extra photo link...' : 'Select video stream link...';
             const specificInputClassName = fieldCategory === 'photo' ? 'additional-photo-input' : 'video-stream-input';
 
             wrapperDiv.innerHTML = `
@@ -530,14 +518,14 @@
             }
 
             const postTitleText = document.getElementById('postTitle').value.trim();
-            const postLabelsValue = document.getElementById('postLabel').value.split(',').map(l => l.trim()).filter(l => l);
+            const postLabelText = document.getElementById('postLabel').value.trim() || "Trending Link";
             const thumbnailSource = document.getElementById('thumbnailUrl').value.trim();
 
             const extraPhotoInputsList = document.querySelectorAll('.additional-photo-input');
             let collectedPhotosHtmlCode = '';
             extraPhotoInputsList.forEach(function(field) {
                 if (field.value.trim() !== '') {
-                    collectedPhotosHtmlCode += `<p><img src="${field.value}" alt="Extra Image" style="max-width:100%; border-radius:12px; margin-bottom:10px;"/></p>`;
+                    collectedPhotosHtmlCode += `<div style="margin-bottom:15px;"><img src="${field.value}" alt="Photo" style="width:100%; border-radius:18px; object-fit:cover;"/></div>`;
                 }
             });
 
@@ -545,13 +533,15 @@
             let collectedVideosHtmlCode = '';
             extraVideoInputsList.forEach(function(field) {
                 if (field.value.trim() !== '') {
-                    collectedVideosHtmlCode += `<p><strong>Video Stream:</strong> ${field.value}</p>`;
+                    collectedVideosHtmlCode += `<div style="margin-bottom:15px;"><video controls style="width:100%; border-radius:18px;"><source src="${field.value}" type="video/mp4"></video></div>`;
                 }
             });
 
+            // প্রফেশনাল কার্ড ডিজাইন HTML যা ব্লগে শো করবে
             const finalPostContentHtml = `
-                <div class="viral-post-body">
-                    ${thumbnailSource ? `<p><img src="${thumbnailSource}" alt="Thumbnail" style="max-width:100%; border-radius:12px; margin-bottom:15px;"/></p>` : ''}
+                <div class="viral-post-container" style="background:#1a1025; padding:20px; border-radius:24px; color:#fff; max-width:400px; margin:auto; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+                    <h2 style="text-align:center; margin-bottom:15px; font-size:1.3rem; color:#fff;">${postTitleText}</h2>
+                    ${thumbnailSource ? `<div style="margin-bottom:15px; position:relative;"><img src="${thumbnailSource}" alt="Thumbnail" style="width:100%; border-radius:18px; object-fit:cover;"/><div style="position:absolute; bottom:10px; left:10px; background:#ff2a75; padding:4px 12px; border-radius:20px; font-size:0.75rem; font-weight:bold;">${postLabelText}</div></div>` : ''}
                     ${collectedPhotosHtmlCode}
                     ${collectedVideosHtmlCode}
                 </div>
@@ -571,7 +561,7 @@
                     body: JSON.stringify({
                         title: postTitleText,
                         content: finalPostContentHtml,
-                        labels: postLabelsValue
+                        labels: [postLabelText]
                     })
                 });
 
@@ -586,7 +576,7 @@
             } catch (networkError) {
                 alert("নেটওয়ার্ক সংযোগে সমস্যা হয়েছে!");
             } finally {
-                publishButtonElement.disabled = false;
+                publishButtonElement.disabled, publishButtonElement.disabled = false;
                 publishButtonElement.innerHTML = `Publish to LiNK Hub <i class="fa-solid fa-paper-plane"></i>`;
             }
         }

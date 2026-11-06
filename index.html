@@ -246,7 +246,7 @@
                 </div>
             </div>
             <div class="status-badge">
-                <i class="fa-solid fa-circle-check"></i> Connected
+                <i class="fa-solid fa-circle-check"></i> Ready
             </div>
         </div>
 
@@ -309,11 +309,9 @@
         </form>
     </div>
 
-    <!-- JavaScript Backend API Execution -->
+    <!-- JavaScript Backend API Execution via Email-to-Post -->
     <script>
-        const BLOG_ID = "4933392428309988074";
-        // আপডেটকৃত ফুল এক্সেস টোকেন (Blogger Full Scope Write Access)
-        const ACCESS_TOKEN = "ya29.a0AehfTOkV2FUZ9Chi7XcdjEh01TnFMX0DDnVTWZsOCJHvFtEEJaaXUa-He7xoE95wPcTJsE618qE6a9YfovVE7q0KPTCbEGUaseMvheVfih03etB8sc0ZRypwc_by11Q4a45jB9ITKlER2r6CKJoDdUrQEEiehHVp67-mxbzORw1i1tcNRUdpQe6TCFAoOwAbjBed_5YaCgYKARoSARESFQHGX2Mip6fbxQ7nA8cl04GJ0A1YWg0206";
+        const BLOGGER_EMAIL = "ios.emon143.LiNKHub@blogger.com";[cite: 8]
 
         function promptLabel() {
             const currentLabel = document.getElementById('postLabel').value;
@@ -340,7 +338,7 @@
             containerBox.appendChild(wrapperDiv);
         }
 
-        async function handlePublish(submissionEvent) {
+        function handlePublish(submissionEvent) {
             submissionEvent.preventDefault();
 
             const postTitleText = document.getElementById('postTitle').value.trim();
@@ -372,38 +370,16 @@
                 </div>
             `;
 
-            const publishButtonElement = document.getElementById('publishBtn');
-            publishButtonElement.disabled = true;
-            publishButtonElement.innerHTML = `Publishing... <i class="fa-solid fa-spinner fa-spin"></i>`;
+            // Mailto link তৈরি করা হচ্ছে যাতে পাবলিশে ক্লিক করলেই ইমেইল ক্লায়েন্ট ওপেন হয়ে সরাসরি ব্লগে পোস্ট চলে যায়
+            const emailSubject = encodeURIComponent(postTitleText);
+            const emailBody = encodeURIComponent(finalPostContentHtml);
+            
+            const mailtoLink = `mailto:${BLOGGER_EMAIL}?subject=${emailSubject}&body=${emailBody}`;[cite: 8]
 
-            try {
-                const response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${ACCESS_TOKEN}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        title: postTitleText,
-                        content: finalPostContentHtml,
-                        labels: [postLabelText]
-                    })
-                });
-
-                const responseJsonData = await response.json();
-
-                if (responseJsonData.id) {
-                    alert("অভিনন্দন! সফলভাবে আপনার LiNK Hub সাইটে পোস্ট পাবলিশ হয়েছে! 🎉");
-                    document.getElementById('postForm').reset();
-                } else {
-                    alert("পোস্ট পাবলিশ করতে সমস্যা হয়েছে: " + (responseJsonData.error?.message || "দয়া করে সঠিক ডিরেক্ট URL ব্যবহার করুন।"));
-                }
-            } catch (networkError) {
-                alert("নেটওয়ার্ক সংযোগে সমস্যা হয়েছে!");
-            } finally {
-                publishButtonElement.disabled = false;
-                publishButtonElement.innerHTML = `Publish to LiNK Hub <i class="fa-solid fa-paper-plane"></i>`;
-            }
+            // মেল ক্লায়েন্ট ওপেন হবে
+            window.location.href = mailtoLink;
+            alert("Publish বাটনে ক্লিক করার পর আপনার ইমেইল অ্যাপ ওপেন হলে শুধু Send বাটনে প্রেস করলেই পোস্ট ব্লগে চলে যাবে! 🎉");
+            document.getElementById('postForm').reset();
         }
     </script>
 </body>

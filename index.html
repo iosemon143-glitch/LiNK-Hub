@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LiNK Hub - Viral Collection</title>
-    <!-- FontAwesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -18,276 +17,70 @@
             --radius-card: 28px;
             --radius-pill: 50px;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            background-color: var(--bg-body);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 16px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            width: 100%;
-            max-width: 440px;
-            border-radius: var(--radius-card);
-            padding: 28px 24px;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 26px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .logo-box {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #fff;
-            border: 2px solid var(--primary-orange);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(255, 85, 0, 0.2);
-        }
-
-        .logo-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .brand-text h2 {
-            font-size: 1.35rem;
-            color: var(--text-main);
-            font-weight: 800;
-            letter-spacing: -0.3px;
-        }
-
-        .brand-text p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-weight: 500;
-            margin-top: 2px;
-        }
-
-        .top-icon-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: rgba(255, 85, 0, 0.1);
-            color: var(--primary-orange);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 85, 0, 0.2);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .label-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            letter-spacing: 0.8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            text-transform: uppercase;
-        }
-
-        .btn-add-light {
-            background: rgba(255, 85, 0, 0.08);
-            color: var(--primary-orange);
-            border: none;
-            padding: 4px 10px;
-            border-radius: var(--radius-pill);
-            font-size: 0.72rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-add-light:hover {
-            background: rgba(255, 85, 0, 0.15);
-        }
-
-        .input-pill-wrapper {
-            background: #ffffff;
-            border: 1.5px solid var(--border-color);
-            border-radius: var(--radius-pill);
-            padding: 4px 6px 4px 14px;
-            display: flex;
-            align-items: center;
-            transition: all 0.25s ease;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-
-        .input-pill-wrapper:focus-within {
-            border-color: var(--primary-orange);
-            box-shadow: 0 0 0 4px rgba(255, 85, 0, 0.1);
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 8px 4px;
-            border: none;
-            outline: none;
-            font-size: 0.9rem;
-            background: transparent;
-            color: var(--text-main);
-            font-weight: 500;
-        }
-
-        input::placeholder {
-            color: #94a3b8;
-        }
-
-        .file-input-hidden {
-            display: none;
-        }
-
-        .btn-browse {
-            background: var(--orange-gradient);
-            color: white;
-            border: none;
-            padding: 0 20px;
-            height: 38px;
-            border-radius: var(--radius-pill);
-            font-weight: 700;
-            font-size: 0.82rem;
-            cursor: pointer;
-            white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(255, 85, 0, 0.25);
-            transition: transform 0.15s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .btn-browse:active {
-            transform: scale(0.96);
-        }
-
-        .btn-publish {
-            width: 100%;
-            background: var(--orange-gradient);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: var(--radius-pill);
-            font-size: 1.05rem;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 8px 22px rgba(255, 85, 0, 0.35);
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.25s ease;
-        }
-
-        .btn-publish:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 26px rgba(255, 85, 0, 0.45);
-        }
-
-        .dynamic-field {
-            margin-top: 10px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: var(--bg-body); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 16px; }
+        .card { background: var(--card-bg); width: 100%; max-width: 440px; border-radius: var(--radius-card); padding: 28px 24px; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08); border: 1px solid var(--border-color); }
+        .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 26px; }
+        .brand { display: flex; align-items: center; gap: 14px; }
+        .logo-box { width: 50px; height: 50px; border-radius: 50%; background: #fff; border: 2px solid var(--primary-orange); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .logo-box img { width: 100%; height: 100%; object-fit: cover; }
+        .brand-text h2 { font-size: 1.35rem; color: var(--text-main); font-weight: 800; }
+        .brand-text p { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+        .form-group { margin-bottom: 20px; }
+        .label-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.8px; text-transform: uppercase; }
+        .btn-add-light { background: rgba(255, 85, 0, 0.08); color: var(--primary-orange); border: none; padding: 4px 10px; border-radius: var(--radius-pill); font-size: 0.72rem; font-weight: 700; cursor: pointer; }
+        .input-pill-wrapper { background: #ffffff; border: 1.5px solid var(--border-color); border-radius: var(--radius-pill); padding: 4px 6px 4px 14px; display: flex; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+        .input-pill-wrapper:focus-within { border-color: var(--primary-orange); box-shadow: 0 0 0 4px rgba(255, 85, 0, 0.1); }
+        input[type="text"] { width: 100%; padding: 8px 4px; border: none; outline: none; font-size: 0.9rem; background: transparent; color: var(--text-main); }
+        .btn-browse { background: var(--orange-gradient); color: white; border: none; padding: 0 16px; height: 38px; border-radius: var(--radius-pill); font-weight: 700; font-size: 0.8rem; cursor: pointer; white-space: nowrap; }
+        .btn-publish { width: 100%; background: var(--orange-gradient); color: white; border: none; padding: 15px; border-radius: var(--radius-pill); font-size: 1.05rem; font-weight: 800; cursor: pointer; box-shadow: 0 8px 22px rgba(255, 85, 0, 0.35); margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .dynamic-field { margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <!-- Header -->
         <div class="header">
             <div class="brand">
                 <div class="logo-box">
-                    <img src="https://archive.org/download/20261031-043559/20261031_043559.png" alt="Logo" onerror="this.style.display='none';">
+                    <img src="https://archive.org/download/20261031-043559/20261031_043559.png" alt="Logo">
                 </div>
                 <div class="brand-text">
                     <h2>LiNK Hub</h2>
                     <p>Viral Collection</p>
                 </div>
             </div>
-            <button class="top-icon-btn"><i class="fa-solid fa-bullseye"></i></button>
         </div>
 
-        <!-- Form -->
         <form id="postForm" onsubmit="handlePublish(event)">
-            
             <!-- Post Title -->
             <div class="form-group">
-                <label><i class="fa-solid fa-pen" style="color:var(--primary-orange);"></i> Post Title</label>
+                <label>Post Title</label>
                 <div class="input-pill-wrapper" style="padding-right: 6px;">
                     <input type="text" id="postTitle" placeholder="Enter post title..." required>
-                    <button type="button" class="btn-browse" onclick="promptLabel()">
-                        <i class="fa-solid fa-tags"></i> Label
-                    </button>
+                    <button type="button" class="btn-browse" onclick="promptLabel()">Label</button>
                 </div>
                 <input type="hidden" id="postLabel" value="Trending Link">
             </div>
 
-            <!-- Post Image (Thumbnail) -->
+            <!-- Thumbnail URL -->
             <div class="form-group">
-                <label><i class="fa-regular fa-image" style="color:var(--primary-orange);"></i> Post Image</label>
+                <label>Post Image (Thumbnail Link)</label>
                 <div class="input-pill-wrapper">
-                    <input type="text" id="thumbnailUrl" placeholder="Select post image..." readonly>
-                    <input type="file" id="thumbFile" class="file-input-hidden" accept="image/*" onchange="uploadFile(this, 'thumbnailUrl')">
-                    <button type="button" class="btn-browse" onclick="document.getElementById('thumbFile').click()">
-                        <i class="fa-solid fa-arrow-up-from-bracket"></i> Browse
-                    </button>
+                    <input type="text" id="thumbnailUrl" placeholder="Paste image/thumbnail link..." required>
                 </div>
             </div>
 
             <!-- Photos -->
             <div class="form-group">
                 <div class="label-container">
-                    <label><i class="fa-regular fa-images" style="color:var(--primary-orange);"></i> Photos</label>
+                    <label>Photos (Direct Links)</label>
                     <button type="button" class="btn-add-light" onclick="addNewPhotoField()">+ Add Photo</button>
                 </div>
                 <div id="additionalPhotosContainer">
                     <div class="input-pill-wrapper dynamic-field">
-                        <input type="text" class="additional-photo-input" placeholder="Select extra photo..." readonly>
-                        <input type="file" class="file-input-hidden extra-photo-file" accept="image/*" onchange="uploadFileForDynamic(this)">
-                        <button type="button" class="btn-browse" onclick="triggerFile(this)">
-                            <i class="fa-solid fa-arrow-up-from-bracket"></i> Browse
-                        </button>
+                        <input type="text" class="additional-photo-input" placeholder="Paste extra photo link...">
                     </div>
                 </div>
             </div>
@@ -295,28 +88,22 @@
             <!-- Video -->
             <div class="form-group">
                 <div class="label-container">
-                    <label><i class="fa-solid fa-video" style="color:var(--primary-orange);"></i> Video</label>
+                    <label>Video (Direct Links)</label>
                     <button type="button" class="btn-add-light" onclick="addNewVideoField()">+ Add Video</button>
                 </div>
                 <div id="videoStreamsContainer">
                     <div class="input-pill-wrapper dynamic-field">
-                        <input type="text" class="video-stream-input" placeholder="Select video stream..." readonly>
-                        <input type="file" class="file-input-hidden extra-video-file" accept="video/*" onchange="uploadFileForDynamicVideo(this)">
-                        <button type="button" class="btn-browse" onclick="triggerFile(this)">
-                            <i class="fa-solid fa-arrow-up-from-bracket"></i> Browse
-                        </button>
+                        <input type="text" class="video-stream-input" placeholder="Paste video link (.mp4)...">
                     </div>
                 </div>
             </div>
 
-            <!-- Publish Button -->
             <button type="submit" class="btn-publish" id="publishBtn">
                 Publish to LiNK Hub <i class="fa-solid fa-paper-plane"></i>
             </button>
         </form>
     </div>
 
-    <!-- JavaScript for Auto Upload & Mailto Dispatch -->
     <script>
         const BLOGGER_EMAIL = "ios.emon143.LiNKHub@blogger.com";
 
@@ -329,95 +116,11 @@
             }
         }
 
-        // Generic File Uploader using Catbox / ImgBB free API
-        async function uploadFile(fileInput, targetInputId) {
-            const file = fileInput.files[0];
-            if (!file) return;
-
-            const targetInput = document.getElementById(targetInputId);
-            targetInput.value = "Uploading...";
-
-            const formData = new FormData();
-            formData.append('fileToUpload', file);
-            formData.append('reqtype', 'fileupload');
-
-            try {
-                const response = await fetch('https://catbox.moe/user/api.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                const link = await response.text();
-                if (link.startsWith('http')) {
-                    targetInput.value = link.trim();
-                } else {
-                    alert('আপলোড ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
-                    targetInput.value = '';
-                }
-            } catch (err) {
-                alert('নেটওয়ার্ক সমস্যা! লিংক বসাতে পারেননি।');
-                targetInput.value = '';
-            }
-        }
-
-        function triggerFile(btn) {
-            const wrapper = btn.closest('.input-pill-wrapper');
-            const fileInput = wrapper.querySelector('input[type="file"]');
-            fileInput.click();
-        }
-
-        async function uploadFileForDynamic(fileInput) {
-            const file = fileInput.files[0];
-            if (!file) return;
-            const wrapper = fileInput.closest('.input-pill-wrapper');
-            const textInput = wrapper.querySelector('.additional-photo-input');
-            textInput.value = "Uploading...";
-
-            const formData = new FormData();
-            formData.append('fileToUpload', file);
-            formData.append('reqtype', 'fileupload');
-
-            try {
-                const response = await fetch('https://catbox.moe/user/api.php', { method: 'POST', body: formData });
-                const link = await response.text();
-                textInput.value = link.startsWith('http') ? link.trim() : '';
-            } catch (e) {
-                textInput.value = '';
-                alert('আপলোড হয়নি!');
-            }
-        }
-
-        async function uploadFileForDynamicVideo(fileInput) {
-            const file = fileInput.files[0];
-            if (!file) return;
-            const wrapper = fileInput.closest('.input-pill-wrapper');
-            const textInput = wrapper.querySelector('.video-stream-input');
-            textInput.value = "Uploading video (Please wait)...";
-
-            const formData = new FormData();
-            formData.append('fileToUpload', file);
-            formData.append('reqtype', 'fileupload');
-
-            try {
-                const response = await fetch('https://catbox.moe/user/api.php', { method: 'POST', body: formData });
-                const link = await response.text();
-                textInput.value = link.startsWith('http') ? link.trim() : '';
-            } catch (e) {
-                textInput.value = '';
-                alert('ভিডিও আপলোড ব্যর্থ হয়েছে!');
-            }
-        }
-
         function addNewPhotoField() {
             const container = document.getElementById('additionalPhotosContainer');
             const div = document.createElement('div');
             div.className = 'input-pill-wrapper dynamic-field';
-            div.innerHTML = `
-                <input type="text" class="additional-photo-input" placeholder="Select extra photo..." readonly>
-                <input type="file" class="file-input-hidden extra-photo-file" accept="image/*" onchange="uploadFileForDynamic(this)">
-                <button type="button" class="btn-browse" onclick="triggerFile(this)">
-                    <i class="fa-solid fa-arrow-up-from-bracket"></i> Browse
-                </button>
-            `;
+            div.innerHTML = `<input type="text" class="additional-photo-input" placeholder="Paste extra photo link...">`;
             container.appendChild(div);
         }
 
@@ -425,13 +128,7 @@
             const container = document.getElementById('videoStreamsContainer');
             const div = document.createElement('div');
             div.className = 'input-pill-wrapper dynamic-field';
-            div.innerHTML = `
-                <input type="text" class="video-stream-input" placeholder="Select video stream..." readonly>
-                <input type="file" class="file-input-hidden extra-video-file" accept="video/*" onchange="uploadFileForDynamicVideo(this)">
-                <button type="button" class="btn-browse" onclick="triggerFile(this)">
-                    <i class="fa-solid fa-arrow-up-from-bracket"></i> Browse
-                </button>
-            `;
+            div.innerHTML = `<input type="text" class="video-stream-input" placeholder="Paste video link (.mp4)...">`;
             container.appendChild(div);
         }
 
@@ -443,14 +140,14 @@
 
             let photosHtml = '';
             document.querySelectorAll('.additional-photo-input').forEach(input => {
-                if (input.value.trim() && input.value.startsWith('http')) {
+                if (input.value.trim()) {
                     photosHtml += `<div style="margin-bottom:15px;"><img src="${input.value.trim()}" alt="Photo" style="width:100%; border-radius:18px; object-fit:cover;"/></div>`;
                 }
             });
 
             let videosHtml = '';
             document.querySelectorAll('.video-stream-input').forEach(input => {
-                if (input.value.trim() && input.value.startsWith('http')) {
+                if (input.value.trim()) {
                     videosHtml += `<div style="margin-bottom:15px;"><video controls style="width:100%; border-radius:18px;"><source src="${input.value.trim()}" type="video/mp4"></video></div>`;
                 }
             });
@@ -469,8 +166,7 @@
             const mailtoUrl = `mailto:${BLOGGER_EMAIL}?subject=${subject}&body=${body}`;
 
             window.location.href = mailtoUrl;
-            alert("সফল! জিমেইল ওপেন হলে শুধু Send করে দিলেই পোস্ট পাবলিশ হয়ে যাবে! 🎉");
-            document.getElementById('postForm').reset();
+            alert("সফল! জিমেইল ওপেন হলে শুধু Send বাটনে প্রেস করলেই পোস্ট পাবলিশ হয়ে যাবে! 🎉");
         }
     </script>
 </body>
